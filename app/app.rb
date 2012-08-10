@@ -5,6 +5,7 @@ class UnfuddleMetrics < Padrino::Application
   register Padrino::Helpers
 
   enable :sessions
+  disable :reload
 
   ##
   # Caching support

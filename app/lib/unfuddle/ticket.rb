@@ -13,9 +13,10 @@ module Unfuddle
       @priority = data["priority"]
       @assignee = client.user(data["assignee_id"])
       @reporter = client.user(data["reporter_id"])
+      @created_at_string = data["created_at"]
       @updated_at_string = data["updated_at"]
-      
-      puts "Ticket #{self.id}: #{self.assignee} - #{self.week_updated}"
+
+      puts "Ticket #{@id}: #{@updated_at_string} - #{self.updated_at}"
     end
 
     def milestone
@@ -28,6 +29,10 @@ module Unfuddle
 
     def reporter
       @reporter ? @reporter.name : ""
+    end
+
+    def created_at
+      @created_at ||= @created_at_string ? DateTime.parse(@created_at_string) : nil
     end
 
     def updated_at

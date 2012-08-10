@@ -4,5 +4,5 @@ class User
   has n, :tickets
 
   property :id,          Serial
-  property :name,        String
+  property :name,        String, :index => true
 end

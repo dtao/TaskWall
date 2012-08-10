@@ -15,7 +15,7 @@ class Ticket
   property :unfuddle_created_at, DateTime
   property :unfuddle_updated_at, DateTime
 
-  def self.fetch_latest
+  def self.fetch_latest!
     latest_id = self.max(:unfuddle_id) || 0
 
     client = Unfuddle::Client.new

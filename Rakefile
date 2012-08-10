@@ -12,6 +12,11 @@ namespace :db do
   task :reset do
     DataMapper.auto_migrate!
   end
+
+  desc "Import all tickets from Unfuddle into the database"
+  task :import do
+    Ticket.fetch_latest!
+  end
 end
 
 namespace :heroku do

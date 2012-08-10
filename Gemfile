@@ -1,6 +1,7 @@
 source :rubygems
 
 # Server requirements
+gem "rack-rewrite"
 gem "thin"
 
 # Project requirements
@@ -8,16 +9,11 @@ gem "rake"
 gem "sinatra-flash", :require => "sinatra/flash"
 
 # Component requirements
+gem "data_mapper", "~> 1.1.0"
 gem "json"
 gem "httparty"
 gem "sass"
 gem "haml"
-gem "dm-validations"
-gem "dm-timestamps"
-gem "dm-migrations"
-gem "dm-constraints"
-gem "dm-aggregates"
-gem "dm-core"
 
 group :production do
   gem "dm-postgres-adapter"

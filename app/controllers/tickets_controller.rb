@@ -1,5 +1,5 @@
 UnfuddleMetrics.controllers :tickets do
-  get :resolved_by_week, :provides => :json do
+  get :closed_by_week, :provides => :json do
     tickets = Ticket.all(:status => "closed", :unfuddle_updated_at.gte => (DateTime.now - 90))
 
     grouped_by_week = tickets.group_by(&:week_updated).to_a

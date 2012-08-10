@@ -7,6 +7,6 @@ class UnfuddleMetrics < Padrino::Application
   enable :sessions
 
   get "/" do
-    render :tickets_resolved_by_week
+    render :tickets_closed_by_week
   end
 end

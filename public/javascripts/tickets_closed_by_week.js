@@ -48,7 +48,7 @@ $(document).ready(function() {
   }
 
   $.ajax({
-    url: "/tickets/resolved_by_week",
+    url: "/tickets/closed_by_week",
     type: "GET",
     dataType: "json",
     success: function(data) {

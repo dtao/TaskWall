@@ -20,7 +20,10 @@ gem "dm-constraints"
 gem "dm-aggregates"
 gem "dm-core"
 
-# Test requirements
+# Dev requirements
+group :development do
+  gem "heroku"
+end
 
 # Padrino Stable Gem
 gem "padrino", "0.10.6"

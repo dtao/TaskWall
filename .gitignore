@@ -1,3 +1,4 @@
+# Padrino crap
 .DS_Store
 log/**/*
 tmp/**/*
@@ -6,4 +7,7 @@ db/*
 vendor/gems/*
 !vendor/gems/cache/
 .sass-cache/*
-unfuddle.yml
+
+# My crap
+.rvmrc
+heroku.yml

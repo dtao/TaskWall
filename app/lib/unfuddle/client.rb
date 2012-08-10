@@ -15,12 +15,12 @@ module Unfuddle
       end
     end
 
-    def initialize(config)
-      config = config.stringify_keys
+    def initialize(config = nil)
+      config ||= ENV
 
-      @subdomain = config["subdomain"]
-      @username = config["username"]
-      @password = config["password"]
+      @subdomain = config["UNFUDDLE_SUBDOMAIN"]
+      @username = config["UNFUDDLE_USERNAME"]
+      @password = config["UNFUDDLE_PASSWORD"]
     end
 
     def project(id)

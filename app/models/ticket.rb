@@ -18,7 +18,7 @@ class Ticket
   def self.fetch_latest
     latest_id = self.max(:unfuddle_id) || 0
 
-    client = Unfuddle::Client.load_from_yaml(File.join(PADRINO_ROOT, "config", "unfuddle.yml"))
+    client = Unfuddle::Client.new
     project = client.project(1)
 
     project.each_ticket do |t|

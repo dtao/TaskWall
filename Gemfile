@@ -18,6 +18,7 @@ gem "haml"
 group :production do
   gem "dm-postgres-adapter"
   gem "pg"
+  gem "rack-ssl-enforcer"
 end
 
 # Dev requirements

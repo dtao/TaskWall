@@ -25,6 +25,12 @@ end
 Padrino.after_load do
   DataMapper.finalize
 
+  if Padrino.env == :development
+    Heroku::Config.vars_from_yaml.each do |name, value|
+      ENV[name] = value
+    end
+  end
+
   # Download any new tickets via the Unfuddle API.
   Ticket.fetch_latest unless Padrino.env == :development
 end

@@ -1,5 +1,4 @@
 require "rake"
-require "yaml"
 
 require File.join(File.dirname(__FILE__), "config", "boot")
 
@@ -18,13 +17,10 @@ end
 namespace :heroku do
   desc "Upload configuration variables to Heroku"
   task :config do
-    config = YAML.load_file(File.join(PADRINO_ROOT, "config", "heroku.yml"))
-    config_vars = config.map do |name, subvars|
-      subvars.map do |key, value|
-        "#{name}_#{key}='#{value}'".upcase
-      end
-    end.flatten.join(" ")
+    config_vars = Heroku::Config.vars_from_yaml.map do |name, value|
+      "#{name}='#{value}'"
+    end
 
-    sh "heroku config:add #{config_vars}"
+    sh "heroku config:add #{config_vars.join(' ')}"
   end
 end

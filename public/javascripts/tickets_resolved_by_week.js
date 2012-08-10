@@ -8,7 +8,7 @@ $(document).ready(function() {
         marginBottom: 25
       },
       title: {
-        text: 'Tickets Resolved by Week',
+        text: 'Tickets Closed by Week',
         x: -20 //center
       },
       xAxis: {
@@ -16,7 +16,7 @@ $(document).ready(function() {
       },
       yAxis: {
         title: {
-          text: 'Total Hours Resolved'
+          text: 'Number of Tickets Closed'
         },
         plotLines: [{
           value: 0,
@@ -48,15 +48,15 @@ $(document).ready(function() {
   }
 
   $.ajax({
-    url: "/tickets_resolved_by_week",
+    url: "/tickets/resolved_by_week",
     type: "GET",
     dataType: "json",
     success: function(data) {
       $("#container").empty();
       displayChart(data.dates, data.series);
     },
-    error: function(status) {
-      displayError("Error: " + status);
+    error: function() {
+      displayError("An unexpected error occurred.");
     }
   });
 });

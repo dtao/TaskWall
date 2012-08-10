@@ -39,8 +39,9 @@ module Unfuddle
       Ticket.new(project_id, data, self)
     end
 
-    def fetch(route)
-      yield Client.get("https://#{@subdomain}.unfuddle.com/api/v1/#{route}.json", options_for_auth)
+    def fetch(route, params=nil)
+      options = params ? options_for_auth.merge(:query => params) : options_for_auth
+      yield Client.get("https://#{@subdomain}.unfuddle.com/api/v1/#{route}.json", options)
     end
 
     private

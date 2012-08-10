@@ -21,6 +21,7 @@ gem "dm-core"
 
 group :production do
   gem "dm-postgres-adapter"
+  gem "pg"
 end
 
 # Dev requirements

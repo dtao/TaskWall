@@ -9,7 +9,7 @@ UnfuddleMetrics.controllers :tickets do
     tickets_per_week = grouped_by_week.map { |week, tickets| tickets }
     names = tickets_per_week.flatten.map(&:assignee).uniq
 
-    results = {
+    {
       :dates => dates,
       :series => names.map { |name|
         {
@@ -20,9 +20,5 @@ UnfuddleMetrics.controllers :tickets do
         }
       }
     }.to_json
-
-    puts "Results: #{results}"
-
-    results
   end
 end

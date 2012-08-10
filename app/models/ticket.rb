@@ -38,8 +38,6 @@ class Ticket
             :unfuddle_created_at => t.created_at,
             :unfuddle_updated_at => t.updated_at
           })
-
-          puts "Ticket added to DB: #{ticket.unfuddle_updated_at}"
         end
 
         true

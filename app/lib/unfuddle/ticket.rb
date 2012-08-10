@@ -15,8 +15,6 @@ module Unfuddle
       @reporter = client.user(data["reporter_id"])
       @created_at_string = data["created_at"]
       @updated_at_string = data["updated_at"]
-
-      puts "Ticket #{@id}: #{@updated_at_string} - #{self.updated_at}"
     end
 
     def milestone

@@ -1,0 +1,15 @@
+%head
+  %title Unfuddle Metrics
+  = stylesheet_link_tag "application"
+  = javascript_include_tag "/javascripts/jquery-1.7.2.js"
+  = javascript_include_tag "/javascripts/highcharts-2.2.5.js"
+  = javascript_include_tag "/javascripts/application.js"
+  = javascript_include_tag "/javascripts/tickets_closed_by_week.js"
+
+%body
+  .navbar
+    %ul
+      %li
+        %a.tickets-closed-by-week(href="javascript:void(0);") Tickets Closed by Week
+  #content
+    #instructions Select an option from the menu above to get started.

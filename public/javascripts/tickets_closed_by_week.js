@@ -2,7 +2,7 @@ $(document).ready(function() {
   function displayChart(dates, series) {
     var chart = new Highcharts.Chart({
       chart: {
-        renderTo: 'container',
+        renderTo: 'content',
         type: 'line',
         marginRight: 130,
         marginBottom: 25
@@ -47,16 +47,18 @@ $(document).ready(function() {
     $("<div id='error'>").text(message).appendTo("#container");
   }
 
-  $.ajax({
-    url: "/tickets/closed_by_week",
-    type: "GET",
-    dataType: "json",
-    success: function(data) {
-      $("#container").empty();
-      displayChart(data.dates, data.series);
-    },
-    error: function() {
-      displayError("An unexpected error occurred.");
-    }
+  $(".tickets-closed-by-week").click(function() {
+    $.ajax({
+      url: "/tickets/closed_by_week",
+      type: "GET",
+      dataType: "json",
+      success: function(data) {
+        $("#content").empty();
+        displayChart(data.dates, data.series);
+      },
+      error: function() {
+        displayError("An unexpected error occurred.");
+      }
+    });
   });
 });

@@ -10,5 +10,6 @@ vendor/gems/*
 
 # My crap
 .rvmrc
-.sublime-workspace
+*.sublime-project
+*.sublime-workspace
 heroku.yml

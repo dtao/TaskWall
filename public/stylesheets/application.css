@@ -4,26 +4,29 @@ html, body {
   margin: 0;
   padding: 0; }
 
-.navbar {
+#navmenu {
   background-color: black;
+  font-size: 12pt;
   height: 40px;
   width: 100%; }
-  .navbar ul {
+  #navmenu ul {
     list-style: none;
     margin: 0;
     padding: 0; }
-    .navbar ul li {
+    #navmenu ul li {
       display: inline;
       height: 40px;
       line-height: 40px;
       margin: auto 10px; }
-      .navbar ul li a {
+      #navmenu ul li a {
         color: white;
+        margin-right: 10px;
         text-decoration: none; }
-      .navbar ul li a:hover {
+      #navmenu ul li a:hover {
         text-decoration: underline; }
 
 #content {
+  font-size: 12pt;
   position: absolute;
   top: 40px;
   bottom: 0px;
@@ -62,3 +65,8 @@ html, body {
 
 #error {
   color: red; }
+
+ul.tickets li.ticket {
+  margin-top: 18px;
+  margin-left: 20px !important;
+  margin-bottom: 0; }

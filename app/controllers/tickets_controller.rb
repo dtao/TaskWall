@@ -1,4 +1,13 @@
 UnfuddleMetrics.controllers :tickets do
+  get :index, :provides => :json do
+    Ticket.all(:status.not => "closed").map { |ticket|
+      {
+        :summary => ticket.summary,
+        :status => ticket.status
+      }
+    }.to_json
+  end
+
   get :closed_by_week, :provides => :json do
     tickets = Ticket.all(:status => "closed", :unfuddle_updated_at.gte => (DateTime.now - 90))
 

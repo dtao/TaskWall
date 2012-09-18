@@ -25,6 +25,7 @@ end
 group :development do
   gem "dm-sqlite-adapter"
   gem "heroku"
+  gem "shotgun"
 end
 
 # Padrino Stable Gem

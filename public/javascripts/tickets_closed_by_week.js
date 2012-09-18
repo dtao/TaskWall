@@ -42,18 +42,13 @@ $(document).ready(function() {
     });
   }
 
-  function displayError(message) {
-    $("#loading").hide();
-    $("<div id='error'>").text(message).appendTo("#container");
-  }
-
-  $(".tickets-closed-by-week").click(function() {
+  $(".tickets-closed-by-week-link").click(function() {
     $.ajax({
       url: "/tickets/closed_by_week",
       type: "GET",
       dataType: "json",
       success: function(data) {
-        $("#content").empty();
+        resetContent();
         displayChart(data.dates, data.series);
       },
       error: function() {

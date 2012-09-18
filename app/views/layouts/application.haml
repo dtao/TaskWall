@@ -1,0 +1,22 @@
+%head
+  %title Unfuddle Metrics
+  = stylesheet_link_tag "/bootstrap/css/bootstrap.min"
+  = stylesheet_link_tag "application"
+  = javascript_include_tag "/javascripts/jquery-1.7.2"
+  = javascript_include_tag "/underscore/underscore.min"
+  = javascript_include_tag "/javascripts/highcharts-2.2.5"
+  = javascript_include_tag "/javascripts/application"
+  = javascript_include_tag "/javascripts/tickets"
+  = javascript_include_tag "/javascripts/tickets_closed_by_week"
+
+%body
+  #navmenu
+    %ul
+      %li
+        %a.tickets-link(href="javascript:void(0);") Tickets
+        %a.tickets-closed-by-week-link(href="javascript:void(0);") Tickets Closed by Week
+  #content
+    = yield
+
+  / Load this image in the background.
+  %img(src="/images/loading.gif" style="display: none;")

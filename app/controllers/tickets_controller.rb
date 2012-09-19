@@ -15,7 +15,7 @@ UnfuddleMetrics.controllers :tickets do
   end
 
   get :index, :with => :id, :provides => :html do
-    @ticket = Ticket.first(:unfuddle_id => params[:id])
+    @ticket = Ticket.first(:unfuddle_id => params[:id].strip)
     render :"tickets/ticket", :layout => false
   end
 end

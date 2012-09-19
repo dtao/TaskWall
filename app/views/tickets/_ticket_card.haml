@@ -1,3 +1,9 @@
 .ticket-card(class="#{ticket.status}")
-  .id= ticket.unfuddle_id
+  .id
+    = ticket.unfuddle_id
+    .icons
+      - if ticket.updates.any?
+        .icon.has-updates
+      - if ticket.comments.any?
+        .icon.has-comments
   .summary= ticket.summary

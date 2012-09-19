@@ -1,0 +1,8 @@
+%table.ticket-updates
+  %tr
+    %th Time
+    %th Status
+  - updates.each do |update|
+    %tr
+      %td.timestamp= format_date(update.unfuddle_timestamp)
+      %td.status= update.status

@@ -37,7 +37,7 @@ $(document).ready(function() {
     });
   });
 
-  $(".ticket-window a.close").live("click", function() {
+  $(".ticket-window .close a").live("click", function() {
     $(".ticket-window").remove();
   });
 });

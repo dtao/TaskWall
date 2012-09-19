@@ -127,7 +127,7 @@ html, body {
     background-color: #ddffff; }
 
 .ticket-window {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   height: 600px;
@@ -150,11 +150,27 @@ html, body {
       color: #888888; }
   .ticket-window .details {
     padding: 10px; }
-  .ticket-window .actions {
+  .ticket-window .updates {
     padding: 10px; }
+    .ticket-window .updates table.ticket-updates {
+      border: 1px solid black;
+      border-collapse: collapse;
+      width: 100%; }
+      .ticket-window .updates table.ticket-updates tr:nth-child(odd) {
+        background-color: #dddddd; }
+      .ticket-window .updates table.ticket-updates th, .ticket-window .updates table.ticket-updates td {
+        text-align: left;
+        padding: 5px 10px; }
   .ticket-window .summary {
     margin-top: 15px; }
   .ticket-window .description {
     margin-top: 15px; }
-  .ticket-window .span.date {
-    color: #000088; }
+  .ticket-window .close {
+    position: absolute;
+    top: 18px;
+    right: 18px; }
+    .ticket-window .close a {
+      color: white;
+      text-decoration: none; }
+    .ticket-window .close a:hover {
+      text-decoration: underline; }

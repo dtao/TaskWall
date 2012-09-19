@@ -7,8 +7,27 @@ module Unfuddle
       @client = client
     end
 
+    def all_users
+      users = []
+
+      @client.fetch("projects/#{@id}/people", { :limit => 100 }) do |response|
+        begin
+          results = JSON.parse(response.body)
+
+          results.each do |data|
+            users << User.new(data)
+          end
+
+        rescue => e
+          puts "An exception occurred: #{e.message}"
+        end
+      end
+
+      users
+    end
+
     def each_ticket
-      starting_id ||= 0
+      starting_id = 0
       finished = false
       page = 1
 
@@ -38,6 +57,29 @@ module Unfuddle
           ensure
             page += 1
           end
+        end
+      end
+    end
+
+    def each_comment(since)
+      options = {
+        :start_date => since.strftime("%Y/%m/%d"),
+        :end_date   => Time.now.strftime("%Y/%m/%d")
+      }
+
+      @client.fetch("projects/#{@id}/tickets/comments", options) do |response|
+        begin
+          results = JSON.parse(response.body)
+
+          results.each do |data|
+            next unless data["parent_type"] == "Ticket"
+            comment = @client.new_comment(data)
+
+            break if !(yield comment)
+          end
+
+        rescue => e
+          puts "An exception occurred: #{e.message}"
         end
       end
     end

@@ -17,6 +17,11 @@
       .description
         = textile(@ticket.description)
 
+  - if @ticket.comments.any?
+    .comments
+      %h3 Comments
+      = render_partial :"tickets/comments_table", :locals => { :comments => @ticket.comments }
+
   - if @ticket.updates.any?
     .updates
       %h3 Updates

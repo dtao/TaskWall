@@ -27,16 +27,16 @@ module Unfuddle
       projects[id] ||= Project.new(id, self)
     end
 
-    def user(id)
-      users[id] ||= User.find(id, self)
-    end
-
     def milestone(project_id, id)
       milestones["#{project_id}_#{id}"] ||= Milestone.find(project_id, id, self)
     end
 
     def new_ticket(project_id, data)
       Ticket.new(project_id, data, self)
+    end
+
+    def new_comment(data)
+      Comment.new(data)
     end
 
     def fetch(route, params=nil)

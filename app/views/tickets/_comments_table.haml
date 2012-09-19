@@ -1,0 +1,10 @@
+%table.ticket-comments
+  %tr
+    %th Time
+    %th User
+    %th Comment
+  - comments.each do |comment|
+    %tr
+      %td.timestamp= format_date(comment.unfuddle_created_at)
+      %td.user= comment.user ? comment.user.name : ""
+      %td.comment= textile comment.body

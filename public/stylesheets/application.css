@@ -150,17 +150,18 @@ html, body {
       color: #888888; }
   .ticket-window .details {
     padding: 10px; }
-  .ticket-window .updates {
+  .ticket-window .comments, .ticket-window .updates {
     padding: 10px; }
-    .ticket-window .updates table.ticket-updates {
+    .ticket-window .comments table, .ticket-window .updates table {
       border: 1px solid black;
       border-collapse: collapse;
       width: 100%; }
-      .ticket-window .updates table.ticket-updates tr:nth-child(odd) {
+      .ticket-window .comments table tr:nth-child(odd), .ticket-window .updates table tr:nth-child(odd) {
         background-color: #dddddd; }
-      .ticket-window .updates table.ticket-updates th, .ticket-window .updates table.ticket-updates td {
+      .ticket-window .comments table th, .ticket-window .comments table td, .ticket-window .updates table th, .ticket-window .updates table td {
+        padding: 5px 10px;
         text-align: left;
-        padding: 5px 10px; }
+        vertical-align: top; }
   .ticket-window .summary {
     margin-top: 15px; }
   .ticket-window .description {

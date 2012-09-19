@@ -7,7 +7,7 @@ UnfuddleMetrics.controllers :tickets do
       @tickets << [week, tickets_for_week.group_by(&:user_id)]
     end
 
-    @users = ["robby", "george", "teddy", "dan", "boris"].map do |name|
+    @users = ["Robby", "George", "Teddy", "Dan", "Boris"].map do |name|
       User.first(:name.like => "%#{name}%")
     end
 

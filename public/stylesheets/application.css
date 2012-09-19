@@ -96,7 +96,6 @@ table td {
 
 .ticket-card {
   float: left;
-  background-color: #dddddd;
   height: 120px;
   width: 120px;
   margin: 0 10px 10px 0;
@@ -105,7 +104,6 @@ table td {
   word-wrap: break-word;
   cursor: pointer; }
   .ticket-card .id {
-    background-color: #bbbbbb;
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 5px;
@@ -119,11 +117,33 @@ table td {
   .ticket-card:hover .id {
     background-color: #ffffdd; }
 
-.closed {
-  border: 2px solid white; }
+.new {
+  border: 2px solid #888888;
+  background-color: white; }
+  .new .id {
+    background-color: #dddddd; }
+
+.reassigned {
+  border: 2px solid white;
+  background-color: #bbffbb; }
+  .reassigned .id {
+    background-color: #ddffdd; }
+
+.reopened {
+  border: 2px solid white;
+  background-color: #ffbbbb; }
+  .reopened .id {
+    background-color: #ffdddd; }
+
+.closed, .resolved {
+  border: 2px solid white;
+  background-color: #dddddd; }
+  .closed .id, .resolved .id {
+    background-color: #bbbbbb; }
 
 .resolved {
-  border: 2px dashed #888888; }
+  border: 2px dashed #888888;
+  background-color: #dddddd; }
 
 .highlighted {
   background-color: #bbffff; }
@@ -183,6 +203,11 @@ table td {
         text-decoration: none; }
       .ticket-window .heading .close a:hover {
         text-decoration: underline; }
+  .ticket-window .ticket-status {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px; }
   .ticket-window .content {
     position: absolute;
     top: 60px;

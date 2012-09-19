@@ -102,7 +102,6 @@ table td
 
 .ticket-card
   float: left
-  background-color: #ddd
   height: 120px
   width: 120px
   margin: 0 10px 10px 0
@@ -112,7 +111,6 @@ table td
   cursor: pointer
 
   .id
-    background-color: #bbb
     font-size: 16px
     font-weight: bold
     margin-bottom: 5px
@@ -128,15 +126,36 @@ table td
   .id
     background-color: #ffd
 
-.closed
+.new
+  border: 2px solid #888
+  background-color: white
+  .id
+    background-color: #ddd
+
+.reassigned
   border: 2px solid white
+  background-color: #bfb
+  .id
+    background-color: #dfd
+
+.reopened
+  border: 2px solid white
+  background-color: #fbb
+  .id
+    background-color: #fdd
+
+.closed, .resolved
+  border: 2px solid white
+  background-color: #ddd
+  .id
+    background-color: #bbb
 
 .resolved
   border: 2px dashed #888
+  background-color: #ddd
 
 .highlighted
   background-color: #bff
-
   .id
     background-color: #dff
 
@@ -198,6 +217,12 @@ table td
 
       a:hover
         text-decoration: underline
+
+  .ticket-status
+    position: absolute
+    top: 20px
+    right: 20px
+    padding: 10px
 
   .content
     position: absolute

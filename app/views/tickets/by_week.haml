@@ -1,7 +1,14 @@
 - content_for :javascripts do
-  = javascript_include_tag "tickets_closed_by_week"
+  = javascript_include_tag "tickets_by_week"
 
 %input.tickets-search(placeholder="Search to highlight certain tickets")
+
+.status-selectors
+  .label Show:
+  - @statuses.each do |status|
+    .status-selector.selected
+      .icon
+      %span.value= status
 
 %table.tickets-closed-by-week
   %tr.header-row

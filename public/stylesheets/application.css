@@ -75,6 +75,23 @@ table td {
   margin: 10px;
   width: 600px; }
 
+.status-selectors {
+  margin: 10px; }
+  .status-selectors .label {
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 10px; }
+  .status-selectors .status-selector {
+    display: inline-block;
+    border: 1px solid white;
+    margin-right: 10px;
+    padding: 5px;
+    cursor: pointer; }
+  .status-selectors .status-selector:hover {
+    border-bottom: 1px solid black; }
+  .status-selectors .selected .icon {
+    background-position: -288px 0; }
+
 .tickets-closed-by-week {
   border-collapse: collapse;
   margin: 0 10px 10px 10px; }
@@ -152,17 +169,6 @@ table td {
 
 .icons {
   float: right; }
-
-.icon {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  margin-top: 1px;
-  line-height: 14px;
-  vertical-align: text-top;
-  background-image: url("../images/glyphs.png");
-  background-position: 14px 14px;
-  background-repeat: no-repeat; }
 
 .has-updates {
   background-position: -264px 0; }

@@ -2,10 +2,16 @@ UnfuddleMetrics.controllers :tickets do
   get :by_week, :provides => :html do
     grouped_by_week = Ticket.all(:created_at.gt => (Time.now - 6.months)).group_by(&:week_updated)
 
-    @tickets = []
+    @tickets  = []
+    @statuses = Set.new
     grouped_by_week.each do |week, tickets_for_week|
       @tickets << [week, tickets_for_week.group_by(&:user_id)]
+      tickets_for_week.each do |ticket|
+        @statuses.add(ticket.status)
+      end
     end
+
+    @selected_statuses = ["closed", "resolved"]
 
     @users = ["Robby", "George", "Teddy", "Dan", "Boris"].map do |name|
       User.first(:name.like => "%#{name}%")

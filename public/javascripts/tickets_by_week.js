@@ -17,6 +17,18 @@ $(document).ready(function() {
     tickets.addClass("highlighted");
   });
 
+  $(".status-selector").click(function() {
+    var $selector = $(this);
+    var status = $selector.find(".value").text();
+    if ($selector.is(".selected")) {
+      $(".ticket-card." + status).hide();
+      $selector.removeClass("selected");
+    } else {
+      $(".ticket-card." + status).show();
+      $selector.addClass("selected");
+    }
+  });
+
   $(".ticket-card").click(function() {
     $(".ticket-window").remove();
 

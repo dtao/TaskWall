@@ -40,4 +40,10 @@ $(document).ready(function() {
   $(".ticket-window .close a").live("click", function() {
     $(".ticket-window").remove();
   });
+
+  $(document).bind("keydown", function(e) {
+    if (e.keyCode === 27) {
+      $(".ticket-window").remove();
+    }
+  });
 });

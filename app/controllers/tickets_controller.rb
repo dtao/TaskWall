@@ -13,4 +13,9 @@ UnfuddleMetrics.controllers :tickets do
 
     render :"tickets/closed_by_week"
   end
+
+  get :index, :with => :id, :provides => :html do
+    @ticket = Ticket.first(:unfuddle_id => params[:id])
+    render :"tickets/ticket", :layout => false
+  end
 end

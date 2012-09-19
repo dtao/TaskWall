@@ -14,6 +14,7 @@ gem "json"
 gem "httparty"
 gem "sass"
 gem "haml"
+gem "RedCloth"
 
 group :production do
   gem "dm-postgres-adapter"

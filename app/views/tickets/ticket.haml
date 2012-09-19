@@ -1,0 +1,27 @@
+.ticket
+  .heading
+    = "Ticket #{@ticket.unfuddle_id}"
+    .created_at
+      Created:
+      %span= format_date(@ticket.unfuddle_created_at)
+    .updated_at
+      Updated:
+      %span= format_date(@ticket.unfuddle_updated_at)
+
+  .details
+    %h2.summary
+      = @ticket.summary
+
+    - unless @ticket.description.blank?
+      %h3 Description
+      .description
+        = textile(@ticket.description)
+
+  - if @ticket.updates.any?
+    .updates
+      - @ticket.updates.each do |update|
+        .timestamp= update.unfuddle_timestamp
+        .status= update.status
+
+  .actions
+    %a.close(href="javascript:void(0);") Close

@@ -1,28 +1,20 @@
+window.CP = {};
+
 $(document).ready(function() {
-  var $content = $("#content");
+  CP.contentPane = $("#content");
 
-  function displayHtml(html) {
-    $content.html(html);
-  }
+  CP.displayLoading = function($container) {
+    $container   = ($container || CP.contentPane).empty();
+    var $loading = $("<div id='loading'>").appendTo($container);
+    $("<div class='message'>").text("Loading...").appendTo($loading);
+  };
 
-  function displayError(message) {
-    $("#loading").hide();
-    $("<div id='error'>").text(message).appendTo("#container");
-  }
-
-  function resetContent() {
-    $content.empty();
-    $content.removeAttr("class");
-  }
+  CP.displayError = function(message, $container) {
+    $container = ($container || CP.contentPane).empty();
+    $("<p class='error'>").text(message).appendTo($container);
+  };
 
   $("#navmenu a").click(function() {
-    $content.empty();
-    var $loading = $("<div id='loading'>").appendTo($content);
-    var $message = $("<div class='message'>").text("Loading...").appendTo($loading);
+    CP.displayLoading();
   });
-
-  // Expose global functions
-  window.displayHtml = displayHtml;
-  window.displayError = displayError;
-  window.resetContent = resetContent;
 });

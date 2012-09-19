@@ -4,7 +4,7 @@ UnfuddleMetrics.controllers :tickets do
 
     @tickets = []
     grouped_by_week.each do |week, tickets_for_week|
-      @tickets << [week, tickets_for_week.group_by(&:assignee)]
+      @tickets << [week, tickets_for_week.group_by(&:user_id)]
     end
 
     @users = ["robby", "george", "teddy", "dan", "boris"].map do |name|

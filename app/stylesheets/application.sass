@@ -140,17 +140,17 @@ html, body
   position: fixed
   top: 50%
   left: 50%
-  height: 600px
-  width: 800px
-  margin-top: -300px
-  margin-left: -400px
-  overflow: auto
   font-size: 16px
   border: 3px solid black
   background-color: white
   z-index: 1000
 
   .heading
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    height: 40px
     background-color: black
     color: white
     font-size: 32px
@@ -161,24 +161,44 @@ html, body
       font-size: 16px
       color: #888
 
-  .details
+    .close
+      position: absolute
+      top: 20px
+      right: 20px
+      font-size: 16px
+      line-height: 20px
+
+      a
+        color: white
+        text-decoration: none
+
+      a:hover
+        text-decoration: underline
+
+  .content
+    position: absolute
+    top: 60px
+    left: 0
+    right: 0
+    bottom: 0
     padding: 10px
+    overflow: auto
 
-  .comments, .updates
-    padding: 10px
+  table
+    border: 1px solid black
+    border-collapse: collapse
+    width: 100%
 
-    table
-      border: 1px solid black
-      border-collapse: collapse
-      width: 100%
+    tr:nth-child(odd)
+      background-color: #ddd
 
-      tr:nth-child(odd)
-        background-color: #ddd
+    th, td
+      padding: 5px 10px
+      text-align: left
+      vertical-align: top
 
-      th, td
-        padding: 5px 10px
-        text-align: left
-        vertical-align: top
+    th.timestamp, td.timestamp
+      width: 120px
 
   .summary
     margin-top: 15px
@@ -186,14 +206,23 @@ html, body
   .description
     margin-top: 15px
 
-  .close
-    position: absolute
-    top: 18px
-    right: 18px
+@media all and (min-width: 1600px)
+  .ticket-window
+    height: 900px
+    width: 1200px
+    margin-top: -450px
+    margin-left: -600px
 
-    a
-      color: white
-      text-decoration: none
+@media all and (min-width: 1200px) and (max-width: 1599px)
+  .ticket-window
+    height: 768px
+    width: 1024px
+    margin-top: -384px
+    margin-left: -512px
 
-    a:hover
-      text-decoration: underline
+@media all and (max-width: 1199px)
+  .ticket-window
+    height: 600px
+    width: 800px
+    margin-top: -300px
+    margin-left: -400px

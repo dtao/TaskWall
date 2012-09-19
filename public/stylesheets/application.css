@@ -130,16 +130,16 @@ html, body {
   position: fixed;
   top: 50%;
   left: 50%;
-  height: 600px;
-  width: 800px;
-  margin-top: -300px;
-  margin-left: -400px;
-  overflow: auto;
   font-size: 16px;
   border: 3px solid black;
   background-color: white;
   z-index: 1000; }
   .ticket-window .heading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
     background-color: black;
     color: white;
     font-size: 32px;
@@ -148,30 +148,57 @@ html, body {
       display: inline-block;
       font-size: 16px;
       color: #888888; }
-  .ticket-window .details {
-    padding: 10px; }
-  .ticket-window .comments, .ticket-window .updates {
-    padding: 10px; }
-    .ticket-window .comments table, .ticket-window .updates table {
-      border: 1px solid black;
-      border-collapse: collapse;
-      width: 100%; }
-      .ticket-window .comments table tr:nth-child(odd), .ticket-window .updates table tr:nth-child(odd) {
-        background-color: #dddddd; }
-      .ticket-window .comments table th, .ticket-window .comments table td, .ticket-window .updates table th, .ticket-window .updates table td {
-        padding: 5px 10px;
-        text-align: left;
-        vertical-align: top; }
+    .ticket-window .heading .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 16px;
+      line-height: 20px; }
+      .ticket-window .heading .close a {
+        color: white;
+        text-decoration: none; }
+      .ticket-window .heading .close a:hover {
+        text-decoration: underline; }
+  .ticket-window .content {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    overflow: auto; }
+  .ticket-window table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%; }
+    .ticket-window table tr:nth-child(odd) {
+      background-color: #dddddd; }
+    .ticket-window table th, .ticket-window table td {
+      padding: 5px 10px;
+      text-align: left;
+      vertical-align: top; }
+    .ticket-window table th.timestamp, .ticket-window table td.timestamp {
+      width: 120px; }
   .ticket-window .summary {
     margin-top: 15px; }
   .ticket-window .description {
     margin-top: 15px; }
-  .ticket-window .close {
-    position: absolute;
-    top: 18px;
-    right: 18px; }
-    .ticket-window .close a {
-      color: white;
-      text-decoration: none; }
-    .ticket-window .close a:hover {
-      text-decoration: underline; }
+
+@media all and (min-width: 1600px) {
+  .ticket-window {
+    height: 900px;
+    width: 1200px;
+    margin-top: -450px;
+    margin-left: -600px; } }
+@media all and (min-width: 1200px) and (max-width: 1599px) {
+  .ticket-window {
+    height: 768px;
+    width: 1024px;
+    margin-top: -384px;
+    margin-left: -512px; } }
+@media all and (max-width: 1199px) {
+  .ticket-window {
+    height: 600px;
+    width: 800px;
+    margin-top: -300px;
+    margin-left: -400px; } }

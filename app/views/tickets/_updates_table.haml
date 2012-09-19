@@ -1,8 +1,10 @@
 %table.ticket-updates
   %tr
-    %th Time
-    %th Status
+    %th.timestamp Time
+    %th.assignee Assignee
+    %th.status Status
   - updates.each do |update|
     %tr
       %td.timestamp= format_date(update.unfuddle_timestamp)
+      %td.assignee= update.user.name
       %td.status= update.status

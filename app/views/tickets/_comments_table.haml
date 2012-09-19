@@ -1,8 +1,8 @@
 %table.ticket-comments
   %tr
-    %th Time
-    %th User
-    %th Comment
+    %th.timestamp Time
+    %th.user User
+    %th.comment Comment
   - comments.each do |comment|
     %tr
       %td.timestamp= format_date(comment.unfuddle_created_at)

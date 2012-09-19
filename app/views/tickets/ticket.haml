@@ -1,31 +1,34 @@
 .ticket
   .heading
     = "Ticket #{@ticket.unfuddle_id}"
+
     .created_at
       Created:
       %span= format_date(@ticket.unfuddle_created_at)
+
     .updated_at
       Updated:
       %span= format_date(@ticket.unfuddle_updated_at)
 
-  .details
-    %h2.summary
-      = @ticket.summary
+    .close
+      %a(href="javascript:void(0);") Close
 
-    - unless @ticket.description.blank?
-      %h3 Description
-      .description
-        = textile(@ticket.description)
+  .content
+    .details
+      %h2.summary
+        = @ticket.summary
 
-  - if @ticket.comments.any?
-    .comments
-      %h3 Comments
-      = render_partial :"tickets/comments_table", :locals => { :comments => @ticket.comments }
+      - unless @ticket.description.blank?
+        %h3 Description
+        .description
+          = textile(@ticket.description)
 
-  - if @ticket.updates.any?
-    .updates
-      %h3 Updates
-      = render_partial :"tickets/updates_table", :locals => { :updates => @ticket.updates }
+    - if @ticket.comments.any?
+      .comments
+        %h3 Comments
+        = render_partial :"tickets/comments_table", :locals => { :comments => @ticket.comments }
 
-  .close
-    %a(href="javascript:void(0);") Close
+    - if @ticket.updates.any?
+      .updates
+        %h3 Updates
+        = render_partial :"tickets/updates_table", :locals => { :updates => @ticket.updates }

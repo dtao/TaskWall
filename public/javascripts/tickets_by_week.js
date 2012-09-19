@@ -50,6 +50,16 @@ $(document).ready(function() {
     });
   });
 
+  $(".ticket-window .section-selector").live("click", function() {
+    var $selector     = $(this);
+    var $ticketWindow = $selector.closest(".ticket");
+    var section       = $selector.text().toLowerCase();
+    $ticketWindow.find(".section").hide();
+    $ticketWindow.find(".section." + section).show();
+    $(".section-selector").removeClass("selected");
+    $selector.addClass("selected");
+  });
+
   $(".ticket-window .close a").live("click", function() {
     $(".ticket-window").remove();
   });

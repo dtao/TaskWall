@@ -17,21 +17,27 @@
     .ticket-status(class="#{@ticket.status}")
       = @ticket.status
 
-    .details
-      %h2.summary
-        = @ticket.summary
+    %h2.summary
+      = @ticket.summary
 
-      - unless @ticket.description.blank?
-        %h3 Description
-        .description
+    .section-selectors
+      .label View:
+      .section-selector.selected Details
+      .section-selector Comments
+      .section-selector Updates
+
+    .details.section
+      %h3 Description
+      .description
+        - unless @ticket.description.blank?
           = textile(@ticket.description)
+        - else
+          None.
 
-    - if @ticket.comments.any?
-      .comments
-        %h3 Comments
-        = render_partial :"tickets/comments_table", :locals => { :comments => @ticket.comments }
+    .comments.section(style="display: none;")
+      %h3 Comments
+      = render_partial :"tickets/comments_table", :locals => { :comments => @ticket.comments }
 
-    - if @ticket.updates.any?
-      .updates
-        %h3 Updates
-        = render_partial :"tickets/updates_table", :locals => { :updates => @ticket.updates }
+    .updates.section(style="display: none;")
+      %h3 Updates
+      = render_partial :"tickets/updates_table", :locals => { :updates => @ticket.updates }

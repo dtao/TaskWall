@@ -66,13 +66,22 @@ html, body {
 #error {
   color: red; }
 
+.tickets-search {
+  font-size: 32px;
+  margin: 10px;
+  width: 600px; }
+
 .tickets-closed-by-week {
-  margin: 10px; }
-  .tickets-closed-by-week tr {
-    border-top: 1px solid black; }
+  border-collapse: collapse;
+  margin: 0 10px 10px 10px; }
   .tickets-closed-by-week th, .tickets-closed-by-week td {
     text-align: left;
     vertical-align: top; }
+  .tickets-closed-by-week .header-row th {
+    border-top: none;
+    padding: 10px 0; }
+  .tickets-closed-by-week .content-row th, .tickets-closed-by-week .content-row td {
+    border-top: 1px solid black; }
 
 .week-column {
   width: 120px; }
@@ -88,17 +97,22 @@ html, body {
   margin: 0 10px 10px 0;
   padding: 5px;
   overflow: hidden;
-  word-wrap: break-word; }
+  word-wrap: break-word;
+  cursor: default; }
   .ticket .id {
     background-color: #bbbbbb;
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 5px;
-    padding: 5px;
-    cursor: move; }
+    padding: 5px; }
   .ticket .summary {
     font-size: 12px;
     margin: 5px; }
+
+.ticket:hover {
+  background-color: #ffffbb; }
+  .ticket:hover .id {
+    background-color: #ffffdd; }
 
 .closed {
   border: 2px solid white; }

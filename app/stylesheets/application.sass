@@ -67,15 +67,27 @@ html, body
 #error
   color: #f00
 
-.tickets-closed-by-week
+.tickets-search
+  font-size: 32px
   margin: 10px
+  width: 600px
 
-  tr
-    border-top: 1px solid black
+.tickets-closed-by-week
+  border-collapse: collapse
+  margin: 0 10px 10px 10px
 
   th, td
     text-align: left
     vertical-align: top
+
+  .header-row
+    th
+      border-top: none
+      padding: 10px 0
+
+  .content-row
+    th, td
+      border-top: 1px solid black
 
 .week-column
   width: 120px
@@ -92,6 +104,7 @@ html, body
   padding: 5px
   overflow: hidden
   word-wrap: break-word
+  cursor: default
 
   .id
     background-color: #bbb
@@ -99,11 +112,16 @@ html, body
     font-weight: bold
     margin-bottom: 5px
     padding: 5px
-    cursor: move
 
   .summary
     font-size: 12px
     margin: 5px
+
+.ticket:hover
+  background-color: #ffb
+
+  .id
+    background-color: #ffd
 
 .closed
   border: 2px solid white

@@ -1,11 +1,16 @@
+- content_for :javascripts do
+  = javascript_include_tag "tickets_closed_by_week"
+
+%input.tickets-search(placeholder="Search for specific tickets")
+
 %table.tickets-closed-by-week
-  %tr
+  %tr.header-row
     %th.week-column Week
     - @users.each do |user|
       %th.tickets-column= user.name
 
   - @tickets.each do |week, tickets_for_week|
-    %tr
+    %tr.content-row
       %th.week-column= week
       - @users.each do |user|
         %td.tickets-column

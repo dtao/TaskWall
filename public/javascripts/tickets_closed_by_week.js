@@ -9,8 +9,9 @@ $(document).ready(function() {
 
     var match   = new RegExp(query, "i");
     var tickets = $(".ticket-card").filter(function() {
+      var id      = $(this).find(".id").text();
       var summary = $(this).find(".summary").text();
-      return match.test(summary);
+      return match.test(summary) || match.test(id);
     });
 
     tickets.addClass("highlighted");

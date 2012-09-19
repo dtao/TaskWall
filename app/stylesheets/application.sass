@@ -67,8 +67,52 @@ html, body
 #error
   color: #f00
 
-ul.tickets
-  li.ticket
-    margin-top: 18px
-    margin-left: 20px !important
-    margin-bottom: 0
+.tickets-closed-by-week
+  margin: 10px
+
+  tr
+    border-top: 1px solid black
+
+  th, td
+    text-align: left
+    vertical-align: top
+
+.week-column
+  width: 120px
+
+.tickets-column
+  min-width: 400px
+
+.ticket
+  float: left
+  background-color: #ddd
+  height: 120px
+  width: 120px
+  margin: 0 10px 10px 0
+  padding: 5px
+  overflow: hidden
+  word-wrap: break-word
+
+  .id
+    background-color: #bbb
+    font-size: 16px
+    font-weight: bold
+    margin-bottom: 5px
+    padding: 5px
+    cursor: move
+
+  .summary
+    font-size: 12px
+    margin: 5px
+
+.closed
+  border: 2px solid white
+
+.resolved
+  border: 2px dashed #888
+
+.highlighted
+  background-color: #bff
+
+  .id
+    background-color: #dff

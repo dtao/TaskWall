@@ -1,6 +1,10 @@
 $(document).ready(function() {
   var $content = $("#content");
 
+  function displayHtml(html) {
+    $content.html(html);
+  }
+
   function displayError(message) {
     $("#loading").hide();
     $("<div id='error'>").text(message).appendTo("#container");
@@ -18,6 +22,7 @@ $(document).ready(function() {
   });
 
   // Expose global functions
+  window.displayHtml = displayHtml;
   window.displayError = displayError;
   window.resetContent = resetContent;
 });

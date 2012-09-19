@@ -1,33 +1,16 @@
 UnfuddleMetrics.controllers :tickets do
-  get :index, :provides => :json do
-    Ticket.all(:status.not => "closed").map { |ticket|
-      {
-        :summary => ticket.summary,
-        :status => ticket.status
-      }
-    }.to_json
-  end
+  get :closed_by_week, :provides => :html do
+    grouped_by_week = Ticket.closed_or_resolved.group_by(&:week_updated)
 
-  get :closed_by_week, :provides => :json do
-    tickets = Ticket.all(:status => "closed", :unfuddle_updated_at.gte => (DateTime.now - 90))
+    @tickets = []
+    grouped_by_week.each do |week, tickets_for_week|
+      @tickets << [week, tickets_for_week.group_by(&:assignee)]
+    end
 
-    grouped_by_week = tickets.group_by(&:week_updated).to_a
-    grouped_by_week.sort_by!(&:first)
+    @users = ["robby", "george", "teddy", "dan", "boris"].map do |name|
+      User.first(:name.like => "%#{name}%")
+    end
 
-    dates = grouped_by_week.map(&:first)
-    tickets_per_week = grouped_by_week.map { |week, tickets| tickets }
-    names = tickets_per_week.flatten.map(&:assignee).uniq
-
-    {
-      :dates => dates,
-      :series => names.map { |name|
-        {
-          :name => name,
-          :data => tickets_per_week.map { |tickets|
-            tickets.select { |t| t.assignee == name }.count
-          }
-        }
-      }
-    }.to_json
+    render :"tickets/closed_by_week"
   end
 end

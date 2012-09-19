@@ -1,0 +1,14 @@
+%table.tickets-closed-by-week
+  %tr
+    %th.week-column Week
+    - @users.each do |user|
+      %th.tickets-column= user.name
+
+  - @tickets.each do |week, tickets_for_week|
+    %tr
+      %th.week-column= week
+      - @users.each do |user|
+        %td.tickets-column
+          .tickets
+            - (tickets_for_week[user.name] || []).each do |ticket|
+              = render_partial :"tickets/ticket", :locals => { :ticket => ticket }

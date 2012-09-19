@@ -2,10 +2,13 @@ class Ticket
   include DataMapper::Resource
 
   belongs_to :user
+  has n, :updates, "TicketUpdate"
 
   property :id,                  Serial
-  property :user_id,             Integer
   property :unfuddle_id,         Integer
+
+  # Duplicate properties
+  property :user_id,             Integer
   property :summary,             String
   property :description,         Text
   property :status,              String
@@ -15,33 +18,56 @@ class Ticket
   property :unfuddle_created_at, DateTime
   property :unfuddle_updated_at, DateTime
 
-  def self.fetch_latest!
-    latest_id = self.max(:unfuddle_id) || 0
+  def self.closed_or_resolved
+    self.all(:status => ["closed", "resolved"])
+  end
 
+  def self.fetch_latest!(since=nil)
     client = Unfuddle::Client.new
     project = client.project(1)
 
-    project.each_ticket do |t|
-      if t.id <= latest_id
-        false
+    since ||= Time.now.utc - 3.months
 
-      else
-        ticket = self.first(:unfuddle_id => t.id)
+    project.each_ticket do |unfuddle_ticket|
+      ticket = self.first(:unfuddle_id => unfuddle_ticket.id)
 
-        if ticket.nil?
-          ticket = self.create({
-            :user_id => User.first_or_create(:name => t.assignee).id,
-            :unfuddle_id => t.id,
-            :summary => t.summary,
-            :description => t.description,
-            :status => t.status,
-            :unfuddle_created_at => t.created_at,
-            :unfuddle_updated_at => t.updated_at
-          })
+      if ticket.nil?
+        # Only create new records for recent tickets.
+        if (unfuddle_ticket.updated_at || unfuddle_ticket.created_at) < since
+          puts "Quitting at Unfuddle ticket #{unfuddle_ticket.id} (too old)"
+          break false
         end
 
-        true
+        ticket = self.create({
+          :unfuddle_id         => unfuddle_ticket.id,
+          :user                => User.first_or_create(:name => unfuddle_ticket.assignee),
+          :summary             => unfuddle_ticket.summary,
+          :description         => unfuddle_ticket.description,
+          :status              => unfuddle_ticket.status,
+          :unfuddle_created_at => unfuddle_ticket.created_at,
+          :unfuddle_updated_at => unfuddle_ticket.updated_at
+        })
+
+        puts "Created ticket #{ticket.id} for Unfuddle ticket #{ticket.unfuddle_id}"
+
+      else
+        if unfuddle_ticket.updated_at > ticket.unfuddle_updated_at
+          ticket.updates.create({
+            :user               => User.first_or_create(:name => unfuddle_ticket.assignee),
+            :summary            => unfuddle_ticket.summary,
+            :description        => unfuddle_ticket.description,
+            :status             => unfuddle_ticket.status,
+            :unfuddle_timestamp => unfuddle_ticket.updated_at
+          })
+
+          puts "Updated ticket #{ticket.id} based on Unfuddle ticket #{ticket.unfuddle_id}"
+
+        else
+          puts "No updates for ticket #{ticket.id}"
+        end
       end
+
+      true
     end
   end
 

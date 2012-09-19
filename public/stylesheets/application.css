@@ -66,7 +66,47 @@ html, body {
 #error {
   color: red; }
 
-ul.tickets li.ticket {
-  margin-top: 18px;
-  margin-left: 20px !important;
-  margin-bottom: 0; }
+.tickets-closed-by-week {
+  margin: 10px; }
+  .tickets-closed-by-week tr {
+    border-top: 1px solid black; }
+  .tickets-closed-by-week th, .tickets-closed-by-week td {
+    text-align: left;
+    vertical-align: top; }
+
+.week-column {
+  width: 120px; }
+
+.tickets-column {
+  min-width: 400px; }
+
+.ticket {
+  float: left;
+  background-color: #dddddd;
+  height: 120px;
+  width: 120px;
+  margin: 0 10px 10px 0;
+  padding: 5px;
+  overflow: hidden;
+  word-wrap: break-word; }
+  .ticket .id {
+    background-color: #bbbbbb;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding: 5px;
+    cursor: move; }
+  .ticket .summary {
+    font-size: 12px;
+    margin: 5px; }
+
+.closed {
+  border: 2px solid white; }
+
+.resolved {
+  border: 2px dashed #888888; }
+
+.highlighted {
+  background-color: #bbffff; }
+  .highlighted .id {
+    background-color: #ddffff; }

@@ -6,15 +6,12 @@
   = javascript_include_tag "/underscore/underscore.min"
   = javascript_include_tag "/javascripts/highcharts-2.2.5"
   = javascript_include_tag "/javascripts/application"
-  = javascript_include_tag "/javascripts/tickets"
-  = javascript_include_tag "/javascripts/tickets_closed_by_week"
 
 %body
   #navmenu
     %ul
       %li
-        %a.tickets-link(href="javascript:void(0);") Tickets
-        %a.tickets-closed-by-week-link(href="javascript:void(0);") Tickets Closed by Week
+        %a.tickets-closed-by-week-link(href="/tickets/closed_by_week") Tickets Closed by Week
   #content
     = yield
 

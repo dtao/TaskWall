@@ -30,9 +30,6 @@ Padrino.after_load do
       ENV[name] = value
     end
   end
-
-  # Download any new tickets via the Unfuddle API - temporarily disabling this.
-  # Ticket.fetch_latest! unless Padrino.env == :development
 end
 
 Padrino.load!

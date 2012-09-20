@@ -64,7 +64,7 @@ module Unfuddle
     def each_comment(since)
       options = {
         :start_date => since.strftime("%Y/%m/%d"),
-        :end_date   => Time.now.strftime("%Y/%m/%d")
+        :end_date   => (Time.now + 1.day).strftime("%Y/%m/%d")
       }
 
       @client.fetch("projects/#{@id}/tickets/comments", options) do |response|

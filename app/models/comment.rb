@@ -25,8 +25,6 @@ class Comment
   end
 
   def self.post(client, ticket, body)
-    puts "Posting new comment to Unfuddle..."
-
     options = {
       :parent_type => "Ticket",
       :parent_id   => ticket.unfuddle_id,
@@ -34,10 +32,8 @@ class Comment
     }.to_xml(:root => "comment")
 
     client.post("projects/1/tickets/#{ticket.unfuddle_id}/comments", options) do |response|
-      puts "Received response headers: #{response.headers.inspect}"
       unfuddle_id = response.headers["Location"].split("/").last
 
-      puts "Creating comment..."
       unfuddle_comment = self.create({
         :user                => User.first(:name.like => "%Dan%"),
         :unfuddle_id         => unfuddle_id,

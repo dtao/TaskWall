@@ -45,12 +45,15 @@ module Unfuddle
     end
 
     def post(route, body=nil)
-      options = body ? options_for_auth.merge(:body => body) : options_for_auth
-      puts "Posting: #{options.inspect}"
+      options = body ? options_for_post.merge(:body => body) : options_for_post
       yield Client.post("https://#{@subdomain}.unfuddle.com/api/v1/#{route}.xml", options)
     end
 
     private
+    def options_for_post
+      options_for_auth.merge(:headers => { "Content-Type" => "application/xml" })
+    end
+
     def options_for_auth
       { :basic_auth => { :username => @username, :password => @password } }
     end

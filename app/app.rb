@@ -5,6 +5,7 @@ class UnfuddleMetrics < Padrino::Application
   register Padrino::Helpers
 
   enable :sessions
+  disable :reload
 
   configure :production do
     use Rack::SslEnforcer
@@ -13,6 +14,12 @@ class UnfuddleMetrics < Padrino::Application
   before do
     unless request.ip == "38.104.129.82" || Padrino.env == :development
       raise "You are not allowed to access this website."
+    end
+  end
+
+  helpers do
+    def unfuddle_client
+      @unfuddle_client ||= Unfuddle::Client.new
     end
   end
 

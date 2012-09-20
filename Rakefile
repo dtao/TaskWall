@@ -19,6 +19,8 @@ namespace :db do
     project = client.project(1)
     since   = Time.now.utc - 3.months
 
+    first_time_import = Ticket.count == 0
+
     project.all_users.each do |unfuddle_user|
       user = User.first(:unfuddle_id => unfuddle_user.id)
 
@@ -39,19 +41,12 @@ namespace :db do
       if ticket.nil?
         # Only create new records for recent tickets.
         if (unfuddle_ticket.updated_at || unfuddle_ticket.created_at) < since
-          puts "Quitting at Unfuddle ticket #{unfuddle_ticket.id} (too old)"
-          break false
+          puts "Skipping Unfuddle ticket #{unfuddle_ticket.id} (too old)"
+          break false unless first_time_import
+          next true
         end
 
-        ticket = Ticket.create({
-          :unfuddle_id         => unfuddle_ticket.id,
-          :user                => User.first(:unfuddle_id => unfuddle_ticket.assignee_id),
-          :summary             => unfuddle_ticket.summary,
-          :description         => unfuddle_ticket.description,
-          :status              => unfuddle_ticket.status,
-          :unfuddle_created_at => unfuddle_ticket.created_at,
-          :unfuddle_updated_at => unfuddle_ticket.updated_at
-        })
+        ticket = Ticket.create_from_unfuddle(unfuddle_ticket)
 
         puts "Created ticket #{ticket.id} for Unfuddle ticket #{ticket.unfuddle_id}"
 
@@ -81,24 +76,11 @@ namespace :db do
       if comment.nil?
         # Only create new records for recent comments.
         if unfuddle_comment.created_at < since
-          puts "Quitting at Unfuddle comment #{unfuddle_comment.id} (too old)"
+          puts "Skipping at Unfuddle comment #{unfuddle_comment.id} (too old)"
           break false
         end
 
-        user = User.first(:unfuddle_id => unfuddle_comment.user_id)
-
-        if user.nil?
-          puts "Cannot create comment for Unfuddle comment #{unfuddle_comment.id} -- user not found"
-          next
-        end
-
-        comment = user.comments.create({
-          :unfuddle_id         => unfuddle_comment.id,
-          :ticket              => Ticket.first(:unfuddle_id => unfuddle_comment.ticket_id),
-          :body                => unfuddle_comment.body,
-          :unfuddle_created_at => unfuddle_comment.created_at,
-          :unfuddle_updated_at => unfuddle_comment.updated_at
-        })
+        comment = Comment.create_from_unfuddle(unfuddle_comment)
 
         puts "Created comment #{comment.id} for Unfuddle comment #{comment.unfuddle_id}"
       end

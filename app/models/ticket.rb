@@ -7,6 +7,7 @@ class Ticket
 
   property :id,                  Serial
   property :unfuddle_id,         Integer, :unique_index => true
+  property :unfuddle_number,     Integer
 
   # Duplicate properties
   property :user_id,             Integer
@@ -18,6 +19,19 @@ class Ticket
   property :updated_at,          DateTime
   property :unfuddle_created_at, DateTime
   property :unfuddle_updated_at, DateTime
+
+  def self.create_from_unfuddle(unfuddle_ticket)
+    self.create({
+      :unfuddle_id         => unfuddle_ticket.id,
+      :unfuddle_number     => unfuddle_ticket.number,
+      :user                => User.first(:unfuddle_id => unfuddle_ticket.assignee_id),
+      :summary             => unfuddle_ticket.summary,
+      :description         => unfuddle_ticket.description,
+      :status              => unfuddle_ticket.status,
+      :unfuddle_created_at => unfuddle_ticket.created_at,
+      :unfuddle_updated_at => unfuddle_ticket.updated_at
+    })
+  end
 
   def self.closed_or_resolved
     self.all(:status => ["closed", "resolved"])

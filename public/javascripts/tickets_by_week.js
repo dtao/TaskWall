@@ -52,12 +52,24 @@ $(document).ready(function() {
 
   $(".ticket-window .section-selector").live("click", function() {
     var $selector     = $(this);
-    var $ticketWindow = $selector.closest(".ticket");
+    var $ticketWindow = $selector.closest(".ticket-window");
     var section       = $selector.text().toLowerCase();
     $ticketWindow.find(".section").hide();
     $ticketWindow.find(".section." + section).show();
     $(".section-selector").removeClass("selected");
     $selector.addClass("selected");
+  });
+
+  $(".ticket-window a.add-comment").live("click", function() {
+    var $link = $(this);
+    var $form = $link.parent().find("form");
+    $form.show();
+    $link.remove();
+  });
+
+  $(".ticket-window form").live("submit", function() {
+    var $ticketWindow = $(this).closest(".ticket-window");
+    CP.displayLoading($ticketWindow);
   });
 
   $(".ticket-window .close a").live("click", function() {

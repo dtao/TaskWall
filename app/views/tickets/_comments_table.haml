@@ -8,3 +8,10 @@
       %td.timestamp= format_date(comment.unfuddle_created_at)
       %td.user= comment.user ? comment.user.name : ""
       %td.comment= textile comment.body
+
+.actions
+  %form.hidden(action="/tickets/comment/#{ticket.unfuddle_id}" method="POST")
+    .field
+      %textarea(name="comment")
+    %input(type="Submit" value="Post")
+  %a.add-comment(href="javascript:void(0);") Add a comment

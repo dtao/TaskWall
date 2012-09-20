@@ -113,6 +113,7 @@ table td {
 
 .ticket-card {
   float: left;
+  border: 2px solid white;
   height: 120px;
   width: 120px;
   margin: 0 10px 10px 0;
@@ -121,6 +122,8 @@ table td {
   word-wrap: break-word;
   cursor: pointer; }
   .ticket-card .id {
+    display: none; }
+  .ticket-card .number {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 5px;
@@ -131,40 +134,47 @@ table td {
 
 .ticket-card:hover {
   background-color: #ffffbb; }
-  .ticket-card:hover .id {
+  .ticket-card:hover .number {
     background-color: #ffffdd; }
 
 .new {
   border: 2px solid #888888;
   background-color: white; }
-  .new .id {
+  .new .number {
     background-color: #dddddd; }
+
+.reopened {
+  background-color: #ffbbbb; }
+  .reopened .number {
+    background-color: #ffdddd; }
 
 .reassigned {
   border: 2px solid white;
+  background-color: #ffddbb; }
+  .reassigned .number {
+    background-color: #ffbb99; }
+
+.accepted {
+  border: 2px solid white;
   background-color: #bbffbb; }
-  .reassigned .id {
+  .accepted .number {
     background-color: #ddffdd; }
 
-.reopened {
-  border: 2px solid white;
-  background-color: #ffbbbb; }
-  .reopened .id {
-    background-color: #ffdddd; }
-
 .closed, .resolved {
-  border: 2px solid white;
   background-color: #dddddd; }
-  .closed .id, .resolved .id {
+  .closed .number, .resolved .number {
     background-color: #bbbbbb; }
 
+.closed {
+  border: 2px solid black; }
+
 .resolved {
-  border: 2px dashed #888888;
-  background-color: #dddddd; }
+  border: 2px solid white; }
 
 .highlighted {
+  border: 2px solid #bbffff;
   background-color: #bbffff; }
-  .highlighted .id {
+  .highlighted .number {
     background-color: #ddffff; }
 
 .icons {
@@ -249,10 +259,16 @@ table td {
       vertical-align: top; }
     .ticket-window table th.timestamp, .ticket-window table td.timestamp {
       width: 120px; }
-  .ticket-window .summary {
-    margin-top: 15px; }
   .ticket-window .description {
     margin-top: 15px; }
+  .ticket-window .actions {
+    font-weight: normal;
+    margin-top: 15px; }
+    .ticket-window .actions textarea {
+      font-size: 16px;
+      height: 200px;
+      width: 500px;
+      margin-bottom: 15px; }
 
 @media all and (min-width: 1600px) {
   .ticket-window {

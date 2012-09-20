@@ -124,6 +124,7 @@ table td
 
 .ticket-card
   float: left
+  border: 2px solid white
   height: 120px
   width: 120px
   margin: 0 10px 10px 0
@@ -133,6 +134,9 @@ table td
   cursor: pointer
 
   .id
+    display: none
+
+  .number
     font-size: 16px
     font-weight: bold
     margin-bottom: 5px
@@ -145,40 +149,47 @@ table td
 .ticket-card:hover
   background-color: #ffb
 
-  .id
+  .number
     background-color: #ffd
 
 .new
   border: 2px solid #888
   background-color: white
-  .id
+  .number
     background-color: #ddd
+
+.reopened
+  background-color: #fbb
+  .number
+    background-color: #fdd
 
 .reassigned
   border: 2px solid white
+  background-color: #fdb
+  .number
+    background-color: #fb9
+
+.accepted
+  border: 2px solid white
   background-color: #bfb
-  .id
+  .number
     background-color: #dfd
 
-.reopened
-  border: 2px solid white
-  background-color: #fbb
-  .id
-    background-color: #fdd
-
 .closed, .resolved
-  border: 2px solid white
   background-color: #ddd
-  .id
+  .number
     background-color: #bbb
 
+.closed
+  border: 2px solid black
+
 .resolved
-  border: 2px dashed #888
-  background-color: #ddd
+  border: 2px solid white
 
 .highlighted
+  border: 2px solid #bff
   background-color: #bff
-  .id
+  .number
     background-color: #dff
 
 .icons
@@ -280,11 +291,18 @@ table td
     th.timestamp, td.timestamp
       width: 120px
 
-  .summary
-    margin-top: 15px
-
   .description
     margin-top: 15px
+
+  .actions
+    font-weight: normal
+    margin-top: 15px
+
+    textarea
+      font-size: 16px
+      height: 200px
+      width: 500px
+      margin-bottom: 15px
 
 @media all and (min-width: 1600px)
   .ticket-window

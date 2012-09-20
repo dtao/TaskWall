@@ -1,6 +1,6 @@
 .ticket
   .heading
-    = "Ticket #{@ticket.unfuddle_id}"
+    = "Ticket #{@ticket.unfuddle_number}"
 
     .created_at
       Created:
@@ -36,7 +36,7 @@
 
     .comments.section(style="display: none;")
       %h3 Comments
-      = render_partial :"tickets/comments_table", :locals => { :comments => @ticket.comments }
+      = render_partial :"tickets/comments_table", :locals => { :ticket => @ticket, :comments => @ticket.comments }
 
     .updates.section(style="display: none;")
       %h3 Updates

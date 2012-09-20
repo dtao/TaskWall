@@ -24,4 +24,10 @@ UnfuddleMetrics.controllers :tickets do
     @ticket = Ticket.first(:unfuddle_id => params[:id].strip)
     render :"tickets/ticket", :layout => false
   end
+
+  post :comment, :with => :ticket_id, :provides => :html do
+    @ticket = Ticket.first(:unfuddle_id => params[:ticket_id].strip)
+    Comment.post(unfuddle_client, @ticket, params[:comment])
+    render :"tickets/ticket", :layout => false
+  end
 end

@@ -61,15 +61,14 @@ $(document).ready(function() {
   });
 
   $(".ticket-window a.add-comment").live("click", function() {
-    var $link = $(this);
-    var $form = $link.parent().find("form");
-    $form.show();
-    $link.remove();
-  });
+    var $link         = $(this);
+    var $form         = $link.parent().find("form");
+    var $ticketWindow = $form.closest(".ticket-window");
 
-  $(".ticket-window form").live("submit", function() {
-    var $ticketWindow = $(this).closest(".ticket-window");
-    CP.displayLoading($ticketWindow);
+    $form.show();
+    CP.ajaxifyForm($form, $ticketWindow);
+
+    $link.remove();
   });
 
   $(".ticket-window .close a").live("click", function() {

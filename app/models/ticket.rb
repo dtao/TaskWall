@@ -2,8 +2,8 @@ class Ticket
   include DataMapper::Resource
 
   belongs_to :user
-  has n, :comments
-  has n, :updates, "TicketUpdate"
+  has n, :comments, :order => [ :unfuddle_created_at.desc ]
+  has n, :updates, "TicketUpdate", :order => [ :unfuddle_timestamp.desc ]
 
   property :id,                  Serial
   property :unfuddle_id,         Integer, :unique_index => true

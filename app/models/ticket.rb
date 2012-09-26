@@ -29,6 +29,7 @@ class Ticket
       :summary             => unfuddle_ticket.summary,
       :description         => unfuddle_ticket.description,
       :status              => unfuddle_ticket.status,
+      :resolution          => unfuddle_ticket.resolution,
       :unfuddle_created_at => unfuddle_ticket.created_at,
       :unfuddle_updated_at => unfuddle_ticket.updated_at
     })

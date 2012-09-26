@@ -9,9 +9,9 @@ $(document).ready(function() {
 
     var match   = new RegExp(query, "i");
     var tickets = $(".ticket-card").filter(function() {
-      var id      = $(this).find(".id").text();
+      var number  = $(this).find(".number").text();
       var summary = $(this).find(".summary").text();
-      return match.test(summary) || match.test(id);
+      return match.test(summary) || match.test(number);
     });
 
     tickets.addClass("highlighted");
@@ -21,11 +21,35 @@ $(document).ready(function() {
     var $selector = $(this);
     var status = $selector.find(".value").text();
     if ($selector.is(".selected")) {
-      $(".ticket-card." + status).hide();
+      $(".ticket-card.status-" + status).addClass("deselected");
       $selector.removeClass("selected");
     } else {
-      $(".ticket-card." + status).show();
+      $(".ticket-card.status-" + status).removeClass("deselected");
       $selector.addClass("selected");
+    }
+  });
+
+  $(".resolution-filter").click(function() {
+    var $filter  = $(this);
+    var resolution = $filter.find(".value").text();
+    if ($filter.is(".selected")) {
+      $(".ticket-card.resolution-" + resolution).removeClass("filtered");
+      $filter.removeClass("selected");
+    } else {
+      $(".ticket-card.resolution-" + resolution).addClass("filtered");
+      $filter.addClass("selected");
+    }
+  });
+
+  $(".hide-non-matching-cards-link").click(function() {
+    var $link  = $(this);
+    var $table = $("table.tickets-by-week");
+    if ($table.is(".hide-non-matching-cards")) {
+      $table.removeClass("hide-non-matching-cards");
+      $link.text("Hide non-matching cards");
+    } else {
+      $table.addClass("hide-non-matching-cards");
+      $link.text("Show all cards");
     }
   });
 

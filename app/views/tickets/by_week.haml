@@ -3,6 +3,8 @@
 
 %input.tickets-search(placeholder="Search to highlight certain tickets")
 
+%a.hide-non-matching-cards-link(href="javascript:void(0);") Hide non-matching cards
+
 .status-selectors
   .label Show:
   - @statuses.each do |status|
@@ -10,7 +12,14 @@
       .icon
       %span.value= status
 
-%table.tickets-closed-by-week
+.resolution-filters
+  .label Filter out:
+  - @resolutions.each do |resolution|
+    .resolution-filter
+      .icon
+      %span.value= resolution
+
+%table.tickets-by-week
   %tr.header-row
     %th.week-column Week
     - @users.each do |user|

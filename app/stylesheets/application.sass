@@ -76,7 +76,13 @@ table td
   margin: 10px
   width: 600px
 
-.status-selectors
+a.hide-non-matching-cards-link
+  text-decoration: none
+
+a.hide-non-matching-cards-link:hover
+  text-decoration: underline
+
+.status-selectors, .resolution-filters
   margin: 10px
 
   .label
@@ -84,21 +90,27 @@ table td
     font-weight: bold
     margin-right: 10px
 
-  .status-selector
+  .status-selector, .resolution-filter
     display: inline-block
     border: 1px solid white
     margin-right: 10px
     padding: 5px
     cursor: pointer
 
-  .status-selector:hover
+  .status-selector:hover, .resolution-filter:hover
     border-bottom: 1px solid black
 
+.status-selectors
   .selected
     .icon
       background-position: -288px 0
 
-.tickets-closed-by-week
+.resolution-filters
+  .selected
+    .icon
+      background-position: -312px 0
+
+.tickets-by-week
   border-collapse: collapse
   margin: 0 10px 10px 10px
 
@@ -152,38 +164,38 @@ table td
   .number
     background-color: #ffd
 
-.new
+.status-new
   border: 2px solid #888
   background-color: white
   .number
     background-color: #ddd
 
-.reopened
+.status-reopened
   background-color: #fbb
   .number
     background-color: #fdd
 
-.reassigned
+.status-reassigned
   border: 2px solid white
   background-color: #fdb
   .number
     background-color: #fb9
 
-.accepted
+.status-accepted
   border: 2px solid white
   background-color: #bfb
   .number
     background-color: #dfd
 
-.closed, .resolved
+.status-closed, .status-resolved
   background-color: #ddd
   .number
     background-color: #bbb
 
-.closed
+.status-closed
   border: 2px solid black
 
-.resolved
+.status-resolved
   border: 2px solid white
 
 .highlighted
@@ -191,6 +203,9 @@ table td
   background-color: #bff
   .number
     background-color: #dff
+
+.deselected, .filtered
+  display: none
 
 .icons
   float: right
@@ -200,6 +215,13 @@ table td
 
 .has-comments
   background-position: -240px -120px
+
+.hide-non-matching-cards
+  .ticket-card
+    display: none
+
+  .highlighted
+    display: block
 
 .ticket-window
   position: fixed
@@ -240,11 +262,15 @@ table td
       a:hover
         text-decoration: underline
 
-  .ticket-status
+  .ticket-glance
     position: absolute
     top: 20px
     right: 20px
     padding: 10px
+    text-align: right
+
+    span.value
+      font-weight: bold
 
   .content
     position: absolute

@@ -75,33 +75,43 @@ table td {
   margin: 10px;
   width: 600px; }
 
-.status-selectors {
+a.hide-non-matching-cards-link {
+  text-decoration: none; }
+
+a.hide-non-matching-cards-link:hover {
+  text-decoration: underline; }
+
+.status-selectors, .resolution-filters {
   margin: 10px; }
-  .status-selectors .label {
+  .status-selectors .label, .resolution-filters .label {
     display: inline-block;
     font-weight: bold;
     margin-right: 10px; }
-  .status-selectors .status-selector {
+  .status-selectors .status-selector, .status-selectors .resolution-filter, .resolution-filters .status-selector, .resolution-filters .resolution-filter {
     display: inline-block;
     border: 1px solid white;
     margin-right: 10px;
     padding: 5px;
     cursor: pointer; }
-  .status-selectors .status-selector:hover {
+  .status-selectors .status-selector:hover, .status-selectors .resolution-filter:hover, .resolution-filters .status-selector:hover, .resolution-filters .resolution-filter:hover {
     border-bottom: 1px solid black; }
-  .status-selectors .selected .icon {
-    background-position: -288px 0; }
 
-.tickets-closed-by-week {
+.status-selectors .selected .icon {
+  background-position: -288px 0; }
+
+.resolution-filters .selected .icon {
+  background-position: -312px 0; }
+
+.tickets-by-week {
   border-collapse: collapse;
   margin: 0 10px 10px 10px; }
-  .tickets-closed-by-week th, .tickets-closed-by-week td {
+  .tickets-by-week th, .tickets-by-week td {
     text-align: left;
     vertical-align: top; }
-  .tickets-closed-by-week .header-row th {
+  .tickets-by-week .header-row th {
     border-top: none;
     padding: 10px 0; }
-  .tickets-closed-by-week .content-row th, .tickets-closed-by-week .content-row td {
+  .tickets-by-week .content-row th, .tickets-by-week .content-row td {
     border-top: 1px solid black;
     padding-top: 10px; }
 
@@ -137,38 +147,38 @@ table td {
   .ticket-card:hover .number {
     background-color: #ffffdd; }
 
-.new {
+.status-new {
   border: 2px solid #888888;
   background-color: white; }
-  .new .number {
+  .status-new .number {
     background-color: #dddddd; }
 
-.reopened {
+.status-reopened {
   background-color: #ffbbbb; }
-  .reopened .number {
+  .status-reopened .number {
     background-color: #ffdddd; }
 
-.reassigned {
+.status-reassigned {
   border: 2px solid white;
   background-color: #ffddbb; }
-  .reassigned .number {
+  .status-reassigned .number {
     background-color: #ffbb99; }
 
-.accepted {
+.status-accepted {
   border: 2px solid white;
   background-color: #bbffbb; }
-  .accepted .number {
+  .status-accepted .number {
     background-color: #ddffdd; }
 
-.closed, .resolved {
+.status-closed, .status-resolved {
   background-color: #dddddd; }
-  .closed .number, .resolved .number {
+  .status-closed .number, .status-resolved .number {
     background-color: #bbbbbb; }
 
-.closed {
+.status-closed {
   border: 2px solid black; }
 
-.resolved {
+.status-resolved {
   border: 2px solid white; }
 
 .highlighted {
@@ -176,6 +186,9 @@ table td {
   background-color: #bbffff; }
   .highlighted .number {
     background-color: #ddffff; }
+
+.deselected, .filtered {
+  display: none; }
 
 .icons {
   float: right; }
@@ -185,6 +198,11 @@ table td {
 
 .has-comments {
   background-position: -240px -120px; }
+
+.hide-non-matching-cards .ticket-card {
+  display: none; }
+.hide-non-matching-cards .highlighted {
+  display: block; }
 
 .ticket-window {
   position: fixed;
@@ -219,11 +237,14 @@ table td {
         text-decoration: none; }
       .ticket-window .heading .close a:hover {
         text-decoration: underline; }
-  .ticket-window .ticket-status {
+  .ticket-window .ticket-glance {
     position: absolute;
     top: 20px;
     right: 20px;
-    padding: 10px; }
+    padding: 10px;
+    text-align: right; }
+    .ticket-window .ticket-glance span.value {
+      font-weight: bold; }
   .ticket-window .content {
     position: absolute;
     top: 60px;

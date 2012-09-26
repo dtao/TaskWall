@@ -14,8 +14,15 @@
       %a(href="javascript:void(0);") Close
 
   .content
-    .ticket-status(class="#{@ticket.status}")
-      = @ticket.status
+    .ticket-glance(class="status-#{@ticket.status}")
+      .ticket-status
+        Status:
+        %span.value= @ticket.status
+
+      - unless @ticket.resolution.blank?
+        .ticket-resolution
+          Resolution:
+          %span.value= @ticket.resolution
 
     %h2.summary
       = @ticket.summary

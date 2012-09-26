@@ -51,12 +51,13 @@ namespace :db do
         puts "Created ticket #{ticket.id} for Unfuddle ticket #{ticket.unfuddle_id}"
 
       else
-        if unfuddle_ticket.updated_at > ticket.unfuddle_updated_at
+        if unfuddle_ticket.updated_at > ticket.unfuddle_updated_at || (ticket.resolution.blank? && !unfuddle_ticket.resolution.blank?)
           ticket.updates.create({
             :user               => User.first(:unfuddle_id => unfuddle_ticket.assignee_id),
             :summary            => unfuddle_ticket.summary,
             :description        => unfuddle_ticket.description,
             :status             => unfuddle_ticket.status,
+            :resolution         => unfuddle_ticket.resolution,
             :unfuddle_timestamp => unfuddle_ticket.updated_at
           })
 

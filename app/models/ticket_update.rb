@@ -12,6 +12,7 @@ class TicketUpdate
   property :summary,            String
   property :description,        Text
   property :status,             String
+  property :resolution,         String
   property :estimate,           Decimal
   property :created_at,         DateTime
   property :unfuddle_timestamp, DateTime
@@ -22,6 +23,7 @@ class TicketUpdate
       :summary             => self.summary,
       :description         => self.description,
       :status              => self.status,
+      :resolution          => self.resolution,
       :estimate            => self.estimate,
       :unfuddle_updated_at => self.unfuddle_timestamp
     })

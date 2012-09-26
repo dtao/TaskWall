@@ -2,7 +2,7 @@ require "date"
 
 module Unfuddle
   class Ticket
-    attr_reader :id, :number, :summary, :description, :status, :priority, :assignee_id, :reporter_id
+    attr_reader :id, :number, :summary, :description, :status, :resolution, :priority, :assignee_id, :reporter_id
 
     def initialize(project_id, data, client)
       @id = data["id"]
@@ -13,6 +13,7 @@ module Unfuddle
       @summary = data["summary"] || ""
       @description = data["description"] || ""
       @status = data["status"]
+      @resolution = data["resolution"]
       @priority = data["priority"]
       @assignee_id = data["assignee_id"]
       @reporter_id = data["reporter_id"]

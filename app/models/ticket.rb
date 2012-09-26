@@ -14,6 +14,7 @@ class Ticket
   property :summary,             String
   property :description,         Text
   property :status,              String
+  property :resolution,          String
   property :estimate,            Decimal
   property :created_at,          DateTime
   property :updated_at,          DateTime

@@ -37,7 +37,25 @@ $(document).ready(function() {
     });
   };
 
+  CP.moveUp = function(selector, callback) {
+    $(selector).animate({
+      bottom: "+=50px"
+    }, 1000, callback);
+  };
+
+  CP.moveDown = function(selector, callback) {
+    $(selector).animate({
+      bottom: "-=50px"
+    }, 1000, callback);
+  };
+
   $("#navmenu a").click(function() {
     CP.displayLoading();
+  });
+
+  CP.moveUp("#flash");
+
+  $(".dismiss").click(function() {
+    $(this).parent().remove();
   });
 });

@@ -16,19 +16,21 @@ table td {
   #navmenu ul {
     list-style: none;
     margin: 0;
-    padding: 0; }
+    padding: 0 10px; }
     #navmenu ul li {
       display: inline;
-      color: white;
+      color: #cccccc;
       height: 40px;
       line-height: 40px;
-      margin: auto 10px; }
+      margin: auto 5px; }
       #navmenu ul li a {
-        color: #88ff88;
+        color: white;
         margin-right: 10px;
         text-decoration: none; }
+      #navmenu ul li a.login {
+        color: #ffffdd; }
       #navmenu ul li a.logout {
-        color: #ff8888; }
+        color: #ffdddd; }
       #navmenu ul li a:hover {
         text-decoration: underline; }
 
@@ -73,6 +75,28 @@ table td {
 #error {
   color: red; }
 
+#flash {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -50px;
+  height: 50px;
+  padding: 0 25px;
+  background-color: black;
+  opacity: 0.5;
+  text-align: center; }
+  #flash .dismiss {
+    float: right;
+    color: white;
+    font-size: 20px;
+    line-height: 50px;
+    cursor: pointer; }
+  #flash .notice {
+    color: white;
+    font-size: 20px;
+    line-height: 50px;
+    opacity: 1; }
+
 .off-screen {
   position: absolute;
   top: -1000px;
@@ -112,8 +136,9 @@ a.hide-non-matching-cards-link:hover {
 
 .ticket-wall {
   border-collapse: collapse;
-  width: 100%;
-  margin: 0 10px 10px 10px; }
+  position: absolute;
+  left: 10px;
+  right: 10px; }
   .ticket-wall th, .ticket-wall td {
     text-align: left;
     vertical-align: top; }

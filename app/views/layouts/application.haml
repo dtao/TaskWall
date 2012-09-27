@@ -22,13 +22,15 @@
           %a(href="/tickets/by_week") Tickets by Week
       - else
         %li
-          %a(href="/auth/google_oauth2") Log in
+          %a.login(href="/auth/google_oauth2") Log in
 
   #content
     = yield
 
   - if flash[:notice]
-    #flash= flash[:notice]
+    #flash
+      .dismiss &times;
+      .notice= flash[:notice]
 
   / Load this image in the background.
   %img.off-screen(src="/images/loading.gif")

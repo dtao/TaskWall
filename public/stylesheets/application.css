@@ -70,6 +70,11 @@ table td {
 #error {
   color: red; }
 
+.off-screen {
+  position: absolute;
+  top: -1000px;
+  left: -1000px; }
+
 .tickets-search {
   font-size: 32px;
   margin: 10px;

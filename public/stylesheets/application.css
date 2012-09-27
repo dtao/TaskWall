@@ -136,18 +136,15 @@ a.hide-non-matching-cards-link:hover {
 
 .ticket-wall {
   border-collapse: collapse;
-  position: absolute;
-  left: 10px;
-  right: 10px; }
+  width: 100%; }
   .ticket-wall th, .ticket-wall td {
+    padding: 10px;
     text-align: left;
     vertical-align: top; }
   .ticket-wall .header-row th {
-    border-top: none;
-    padding: 10px 0; }
+    border-top: none; }
   .ticket-wall .content-row th, .ticket-wall .content-row td {
-    border-top: 1px solid black;
-    padding-top: 10px; }
+    border-top: 1px solid black; }
 
 .week-column {
   width: 120px; }

@@ -13,6 +13,10 @@
     %ul
       - if logged_in?
         %li
+          = "Logged in as #{current_user.name}"
+        %li
+          %a.logout(href="/logout") Log out
+        %li
           %a(href="/tickets/by_week") Tickets by Week
       - else
         %li

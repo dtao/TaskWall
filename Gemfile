@@ -12,6 +12,7 @@ gem "sinatra-flash", :require => "sinatra/flash"
 gem "data_mapper", "~> 1.1.0"
 gem "omniauth"
 gem "omniauth-google-oauth2"
+gem "rack-ssl-enforcer"
 gem "builder"
 gem "json"
 gem "httparty"
@@ -22,7 +23,6 @@ gem "RedCloth"
 group :production do
   gem "dm-postgres-adapter"
   gem "pg"
-  gem "rack-ssl-enforcer"
 end
 
 # Dev requirements

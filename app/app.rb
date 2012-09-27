@@ -4,11 +4,21 @@ class UnfuddleMetrics < Padrino::Application
   register Padrino::Mailer
   register Padrino::Helpers
 
-  enable :sessions
   disable :reload
 
-  configure :production do
+  configure do
     use Rack::SslEnforcer
+
+    #Enable sinatra sessions
+    session_secret = "ycogs5752850291n8svf58l141ox123232d7280l89624d80y727ax9zm13x"
+    set :session_secret, session_secret
+
+    use Rack::Session::Cookie, {
+      :key          => '_rack_session',
+      :path         => '/',
+      :expire_after => 2592000, # In seconds
+      :secret       => session_secret
+    }
 
     use OmniAuth::Builder do
       provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], {access_type: "online", approval_prompt: ""}
@@ -17,7 +27,7 @@ class UnfuddleMetrics < Padrino::Application
 
   before do
     if !logged_in?
-      redirect "/" unless request.path == "/"
+      redirect "/" unless ["/", "/auth/google_oauth2", "/auth/google_oauth2/callback"].include?(request.path)
     end
   end
 
@@ -39,8 +49,14 @@ class UnfuddleMetrics < Padrino::Application
     render :index
   end
 
+  get "/logout" do
+    session.delete(:user_id)
+    redirect "/"
+  end
+
   get "/auth/google_oauth2/callback" do
     auth_hash = request.env["omniauth.auth"]
+    user_info = auth_hash["info"]
 
     user = User.first(:email => user_info["email"])
 

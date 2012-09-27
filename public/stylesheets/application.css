@@ -19,13 +19,16 @@ table td {
     padding: 0; }
     #navmenu ul li {
       display: inline;
+      color: white;
       height: 40px;
       line-height: 40px;
       margin: auto 10px; }
       #navmenu ul li a {
-        color: white;
+        color: #88ff88;
         margin-right: 10px;
         text-decoration: none; }
+      #navmenu ul li a.logout {
+        color: #ff8888; }
       #navmenu ul li a:hover {
         text-decoration: underline; }
 

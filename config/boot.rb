@@ -26,7 +26,7 @@ Padrino.after_load do
   DataMapper.finalize
 
   if Padrino.env == :development
-    Heroku::Config.vars_from_yaml.each do |name, value|
+    Heroku::Config.vars_from_yaml("development").each do |name, value|
       ENV[name] = value
     end
   end

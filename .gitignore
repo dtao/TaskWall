@@ -12,4 +12,5 @@ vendor/gems/*
 .rvmrc
 *.sublime-project
 *.sublime-workspace
-heroku.yml
+google.yml
+unfuddle.yml

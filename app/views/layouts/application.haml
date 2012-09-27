@@ -11,10 +11,18 @@
 %body
   #navmenu
     %ul
-      %li
-        %a(href="/tickets/by_week") Tickets by Week
+      - if logged_in?
+        %li
+          %a(href="/tickets/by_week") Tickets by Week
+      - else
+        %li
+          %a(href="/auth/google_oauth2") Log in
+
   #content
     = yield
+
+  - if flash[:notice]
+    #flash= flash[:notice]
 
   / Load this image in the background.
   %img(src="/images/loading.gif" style="display: none;")

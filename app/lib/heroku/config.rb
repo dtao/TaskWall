@@ -1,15 +1,16 @@
 module Heroku
   class Config
-    def self.vars_from_yaml
-      config = YAML.load_file(File.join(PADRINO_ROOT, "config", "heroku.yml"))
+    def self.vars_from_yaml(environment)
+      config_vars = []
 
-      config_vars = config.map do |name, subvars|
-        subvars.map do |key, value|
-          ["#{name}_#{key}".upcase, value]
+      ["google.yml", "unfuddle.yml"].each do |file|
+        config = YAML.load_file(File.join(PADRINO_ROOT, "config", file))[environment]
+        config.each do |name, value|
+          config_vars << [name, value]
         end
       end
 
-      config_vars.flatten(1)
+      config_vars
     end
   end
 end

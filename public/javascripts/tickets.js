@@ -43,7 +43,7 @@ $(document).ready(function() {
 
   $(".hide-non-matching-cards-link").click(function() {
     var $link  = $(this);
-    var $table = $("table.tickets-by-week");
+    var $table = $("table.ticket-wall");
     if ($table.is(".hide-non-matching-cards")) {
       $table.removeClass("hide-non-matching-cards");
       $link.text("Hide non-matching cards");

@@ -22,14 +22,12 @@
 %table.ticket-wall
   %tr.header-row
     %th.week-column Week
-    - @users.each do |user|
-      %th.tickets-column= user.name
+    %th.tickets-column= current_user.name
 
   - @tickets.each do |week, tickets_for_week|
     %tr.content-row
       %th.week-column= week
-      - @users.each do |user|
-        %td.tickets-column
-          .tickets
-            - (tickets_for_week[user.id] || []).each do |ticket|
-              = render_partial :"tickets/ticket_card", :locals => { :ticket => ticket }
+      %td.tickets-column
+        .tickets
+          - tickets_for_week.each do |ticket|
+            = render_partial :"tickets/ticket_card", :locals => { :ticket => ticket }

@@ -110,16 +110,17 @@ a.hide-non-matching-cards-link:hover {
 .resolution-filters .selected .icon {
   background-position: -312px 0; }
 
-.tickets-by-week {
+.ticket-wall {
   border-collapse: collapse;
+  width: 100%;
   margin: 0 10px 10px 10px; }
-  .tickets-by-week th, .tickets-by-week td {
+  .ticket-wall th, .ticket-wall td {
     text-align: left;
     vertical-align: top; }
-  .tickets-by-week .header-row th {
+  .ticket-wall .header-row th {
     border-top: none;
     padding: 10px 0; }
-  .tickets-by-week .content-row th, .tickets-by-week .content-row td {
+  .ticket-wall .content-row th, .ticket-wall .content-row td {
     border-top: 1px solid black;
     padding-top: 10px; }
 

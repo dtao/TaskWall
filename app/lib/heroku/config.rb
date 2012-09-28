@@ -1,6 +1,6 @@
 module Heroku
   class Config
-    def self.vars_from_yaml(environment)
+    def self.vars_from_yaml(environment="development")
       config_vars = []
 
       ["google.yml", "unfuddle.yml"].each do |file|

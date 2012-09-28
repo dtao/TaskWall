@@ -93,7 +93,7 @@ end
 namespace :heroku do
   desc "Upload configuration variables to Heroku"
   task :config do
-    config_vars = Heroku::Config.vars_from_yaml.map do |name, value|
+    config_vars = Heroku::Config.vars_from_yaml("production").map do |name, value|
       "#{name}='#{value}'"
     end
 

@@ -15,12 +15,10 @@ module Unfuddle
       end
     end
 
-    def initialize(config = nil)
-      config ||= ENV
-
-      @subdomain = config["UNFUDDLE_SUBDOMAIN"]
-      @username = config["UNFUDDLE_USERNAME"]
-      @password = config["UNFUDDLE_PASSWORD"]
+    def initialize(config = {})
+      @subdomain = config[:subdomain] || ENV["UNFUDDLE_SUBDOMAIN"]
+      @username  = config[:username]  || ENV["UNFUDDLE_USERNAME"]
+      @password  = config[:password]  || ENV["UNFUDDLE_PASSWORD"]
     end
 
     def project(id)
@@ -47,6 +45,11 @@ module Unfuddle
     def post(route, body=nil)
       options = body ? options_for_post.merge(:body => body) : options_for_post
       yield Client.post("https://#{@subdomain}.unfuddle.com/api/v1/#{route}.xml", options)
+    end
+
+    def put(route, body=nil)
+      options = body ? options_for_post.merge(:body => body) : options_for_post
+      yield Client.put("https://#{@subdomain}.unfuddle.com/api/v1/#{route}.xml", options)
     end
 
     private

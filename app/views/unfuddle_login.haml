@@ -1,0 +1,14 @@
+#unfuddle-login
+  .heading Enter your Unfuddle password
+  .content
+    %form(action="/unfuddle_login" method="POST")
+      .field
+        %label Username
+        .text= current_user.unfuddle_username
+
+      .field
+        %label(for="password") Password
+        %input.text(type="password" name="password")
+
+      .action
+        %input.button(type="submit")

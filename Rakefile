@@ -25,13 +25,12 @@ namespace :db do
       user = User.first(:unfuddle_id => unfuddle_user.id)
 
       if user.nil?
-        user = User.create({
-          :unfuddle_id => unfuddle_user.id,
-          :name        => unfuddle_user.name,
-          :email       => unfuddle_user.email
-        })
-
+        user = User.create_from_unfuddle(unfuddle_user)
         puts "Created user #{user.id} for Unfuddle user #{user.unfuddle_id}"
+
+      elsif user.unfuddle_username.nil?
+        user.update(:unfuddle_username => unfuddle_user.username)
+        puts "Updated user #{user.id} for Unfuddle user #{user.unfuddle_id}"
       end
     end
 

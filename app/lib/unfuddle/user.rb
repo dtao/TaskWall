@@ -1,6 +1,6 @@
 module Unfuddle
   class User
-    attr_reader :id, :email
+    attr_reader :id, :username, :email
 
     def initialize(properties)
       @id         = properties["id"]

@@ -53,9 +53,13 @@ $(document).ready(function() {
     CP.displayLoading();
   });
 
-  CP.moveUp("#flash");
+  $("form").submit(function() {
+    CP.displayLoading();
+  });
 
   $(".dismiss").click(function() {
     $(this).parent().remove();
   });
+
+  CP.moveUp("#flash");
 });

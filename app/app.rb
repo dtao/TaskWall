@@ -14,8 +14,8 @@ class UnfuddleMetrics < Padrino::Application
     set :session_secret, session_secret
 
     use Rack::Session::Cookie, {
-      :key          => '_rack_session',
-      :path         => '/',
+      :key          => "_rack_session",
+      :path         => "/",
       :expire_after => 2592000, # In seconds
       :secret       => session_secret
     }
@@ -29,6 +29,9 @@ class UnfuddleMetrics < Padrino::Application
     if !logged_in?
       redirect "/" unless ["/", "/auth/google_oauth2", "/auth/google_oauth2/callback"].include?(request.path)
     end
+    if !authenticated?
+      redirect "/unfuddle_login" unless ["/unfuddle_login", "/auth/google_oauth2/callback"].include?(request.path)
+    end
   end
 
   helpers do
@@ -36,12 +39,23 @@ class UnfuddleMetrics < Padrino::Application
       !!current_user
     end
 
+    def authenticated?
+      !!unfuddle_creds[:password]
+    end
+
     def current_user
       @current_user ||= User.get(session[:user_id])
     end
 
+    def unfuddle_creds
+      {
+        :username => current_user.unfuddle_username,
+        :password => session[:unfuddle_password]
+      }
+    end
+
     def unfuddle_client
-      @unfuddle_client ||= Unfuddle::Client.new
+      @unfuddle_client ||= Unfuddle::Client.new(unfuddle_creds)
     end
   end
 
@@ -49,8 +63,18 @@ class UnfuddleMetrics < Padrino::Application
     render :index
   end
 
+  get "/unfuddle_login" do
+    render :unfuddle_login
+  end
+
+  post "/unfuddle_login" do
+    session[:unfuddle_password] = params[:password]
+    redirect "/"
+  end
+
   get "/logout" do
     session.delete(:user_id)
+    session.delete(:unfuddle_password)
     redirect "/"
   end
 
@@ -64,6 +88,10 @@ class UnfuddleMetrics < Padrino::Application
       session[:user_id] = user.id
     else
       flash[:notice] = "You cannot log in unless you are part of the Unfuddle project!"
+    end
+
+    if !authenticated?
+      redirect "/auth_unfuddle"
     end
 
     redirect "/"

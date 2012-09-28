@@ -17,6 +17,16 @@ class TicketUpdate
   property :created_at,         DateTime
   property :unfuddle_timestamp, DateTime
 
+  before :create do
+    self.user               ||= self.ticket.user
+    self.summary            ||= self.ticket.summary
+    self.description        ||= self.ticket.description
+    self.status             ||= self.ticket.status
+    self.resolution         ||= self.ticket.resolution
+    self.estimate           ||= self.ticket.estimate
+    self.unfuddle_timestamp ||= self.ticket.unfuddle_updated_at
+  end
+
   after :create do
     self.ticket.update({
       :user                => self.user,

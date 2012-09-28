@@ -25,13 +25,13 @@ class Comment
   end
 
   def self.post(client, ticket, body)
-    options = {
+    request_body = {
       :parent_type => "Ticket",
       :parent_id   => ticket.unfuddle_id,
       :body        => body
     }.to_xml(:root => "comment")
 
-    client.post("projects/1/tickets/#{ticket.unfuddle_id}/comments", options) do |response|
+    client.post("projects/1/tickets/#{ticket.unfuddle_id}/comments", request_body) do |response|
       unfuddle_id = response.headers["Location"].split("/").last
 
       unfuddle_comment = self.create({

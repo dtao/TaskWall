@@ -28,8 +28,7 @@ class UnfuddleMetrics < Padrino::Application
   before do
     if !logged_in?
       redirect "/" unless ["/", "/auth/google_oauth2", "/auth/google_oauth2/callback"].include?(request.path)
-    end
-    if !authenticated?
+    elsif !authenticated?
       redirect "/unfuddle_login" unless ["/unfuddle_login", "/auth/google_oauth2/callback"].include?(request.path)
     end
   end

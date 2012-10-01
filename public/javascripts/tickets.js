@@ -1,4 +1,17 @@
 $(document).ready(function() {
+  function linkRevealsForm(selector) {
+    $(selector).live("click", function() {
+      var $link         = $(this);
+      var $form         = $link.parent().find("form");
+      var $ticketWindow = $form.closest(".ticket-window");
+
+      $form.show();
+      CP.ajaxifyForm($form, $ticketWindow);
+
+      $link.remove();
+    });
+  }
+
   $(".tickets-search").keyup(function() {
     $(".ticket-card").removeClass("highlighted");
 
@@ -84,16 +97,8 @@ $(document).ready(function() {
     $selector.addClass("selected");
   });
 
-  $(".ticket-window a.add-comment").live("click", function() {
-    var $link         = $(this);
-    var $form         = $link.parent().find("form");
-    var $ticketWindow = $form.closest(".ticket-window");
-
-    $form.show();
-    CP.ajaxifyForm($form, $ticketWindow);
-
-    $link.remove();
-  });
+  linkRevealsForm(".ticket-window a.update-status");
+  linkRevealsForm(".ticket-window a.add-comment");
 
   $(".ticket-window .close a").live("click", function() {
     $(".ticket-window").remove();

@@ -40,6 +40,13 @@
           = textile(@ticket.description)
         - else
           None.
+      %form.hidden(action="/tickets/status/#{@ticket.unfuddle_id}" method="POST")
+        .field
+          %select(name="status")
+            - ["new", "reopened", "reassigned", "accepted", "resolved", "closed"].each do |status|
+              %option(value="#{status}")= status.capitalize
+        %input(type="Submit")
+      %a.update-status(href="javascript:void(0);") Update status
 
     .comments.section(style="display: none;")
       %h3 Comments

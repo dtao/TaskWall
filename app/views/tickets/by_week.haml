@@ -25,7 +25,7 @@
     - @users.each do |user|
       %th.tickets-column= user.name
 
-  - @tickets.each do |week, tickets_for_week|
+  - @tickets.sort_by(&:first).reverse.each do |week, tickets_for_week|
     %tr.content-row
       %th.week-column= week
       - @users.each do |user|

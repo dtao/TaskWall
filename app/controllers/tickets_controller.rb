@@ -3,6 +3,7 @@ UnfuddleMetrics.controllers :tickets do
     @tickets     = current_user.tickets(:created_at.gt => (Time.now - 6.months)).group_by(&:week_updated)
     @statuses    = @tickets.values.flatten.map(&:status).uniq
     @resolutions = @tickets.values.flatten.map(&:resolution).reject(&:blank?).uniq
+    @tickets     = @tickets.to_a.sort_by(&:first).reverse
     render :"tickets/mine"
   end
 
@@ -15,6 +16,8 @@ UnfuddleMetrics.controllers :tickets do
     grouped_by_week.each do |week, tickets_for_week|
       @tickets << [week, tickets_for_week.group_by(&:user_id)]
     end
+
+    @tickets.sort_by!(&:first).reverse!
 
     @users = ["Robby", "George", "Teddy", "Dan", "Boris"].map do |name|
       User.first(:name.like => "%#{name}%")

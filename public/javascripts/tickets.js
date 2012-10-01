@@ -104,6 +104,15 @@ $(document).ready(function() {
     $(".ticket-window").remove();
   });
 
+  $(".update-status-form .status-field select").live("change", function() {
+    var status = $(this).val();
+    if (status === "resolved") {
+      $(this).closest("form").find(".resolution-field").show();
+    } else {
+      $(this).closest("form").find(".resolution-field").hide();
+    }
+  });
+
   $(document).bind("keydown", function(e) {
     if (e.keyCode === 27) {
       $(".ticket-window").remove();

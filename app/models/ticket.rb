@@ -49,8 +49,14 @@ class Ticket
     saturday.strftime("%Y-%m-%d")
   end
 
-  def post_status_update(client, status)
-    request_body = { :status => status }.to_xml(:root => "ticket")
+  def post_status_update(client, status, resolution)
+    request_data = { :status => status }
+
+    if status == "resolved"
+      request_data[:resolution] = resolution
+    end
+
+    request_body = request_data.to_xml(:root => "ticket")
 
     client.put("projects/1/tickets/#{self.unfuddle_id}", request_body) do |response|
       self.updates.create({ :status => status })

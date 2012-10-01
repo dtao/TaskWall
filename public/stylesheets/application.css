@@ -104,6 +104,9 @@ table td {
   height: 1px;
   width: 1px; }
 
+.field {
+  margin-bottom: 5px; }
+
 #unfuddle-login {
   position: fixed;
   top: 50%;
@@ -157,8 +160,6 @@ table td {
       margin-left: -25%;
       padding: 0 25px;
       text-align: left; }
-      #unfuddle-login .content form .field {
-        margin-bottom: 15px; }
       #unfuddle-login .content form .text, #unfuddle-login .content form .button {
         font-size: 24px; }
       #unfuddle-login .content form label {
@@ -414,3 +415,9 @@ a.hide-non-matching-cards-link:hover {
       height: 200px;
       width: 500px;
       margin-bottom: 15px; }
+  .ticket-window form {
+    background-color: #dddddd;
+    padding: 10px; }
+    .ticket-window form label {
+      display: inline-block;
+      width: 100px; }

@@ -31,7 +31,7 @@ UnfuddleMetrics.controllers :tickets do
   post :status, :with => :id, :provides => :html do
     halt redirect("/unfuddle_login") if !authenticated?
     @ticket = Ticket.first(:unfuddle_id => params[:id].strip)
-    @ticket.post_status_update(unfuddle_client, params[:status])
+    @ticket.post_status_update(unfuddle_client, params[:status], params[:resolution])
     render :"tickets/ticket", :layout => false
   end
 

@@ -9,7 +9,7 @@ class UnfuddleMetrics < Padrino::Application
   configure do
     use Rack::SslEnforcer
 
-    #Enable sinatra sessions
+    # Enable sinatra sessions
     session_secret = "ycogs5752850291n8svf58l141ox123232d7280l89624d80y727ax9zm13x"
     set :session_secret, session_secret
 
@@ -28,8 +28,8 @@ class UnfuddleMetrics < Padrino::Application
   before do
     if !logged_in?
       redirect "/" unless ["/", "/auth/google_oauth2", "/auth/google_oauth2/callback"].include?(request.path)
-    elsif !authenticated?
-      redirect "/unfuddle_login" unless ["/unfuddle_login", "/auth/google_oauth2/callback"].include?(request.path)
+    elsif !authenticated? && !skipped_unfuddle_login?
+      redirect "/unfuddle_login" unless ["/unfuddle_login", "/skip_unfuddle_login", "/auth/google_oauth2/callback"].include?(request.path)
     end
   end
 
@@ -39,7 +39,11 @@ class UnfuddleMetrics < Padrino::Application
     end
 
     def authenticated?
-      !!unfuddle_creds[:password]
+      !!session[:unfuddle_password]
+    end
+
+    def skipped_unfuddle_login?
+      !!session[:skipped_unfuddle_login]
     end
 
     def current_user
@@ -68,6 +72,11 @@ class UnfuddleMetrics < Padrino::Application
 
   post "/unfuddle_login" do
     session[:unfuddle_password] = params[:password]
+    redirect "/"
+  end
+
+  get "/skip_unfuddle_login" do
+    session[:skipped_unfuddle_login] = true
     redirect "/"
   end
 

@@ -1,6 +1,6 @@
 UnfuddleMetrics.controllers :tickets do
   get :mine, :provides => :html do
-    @tickets = current_user.tickets(:created_at.gt => Time.now - 6.months).group_by(&:week_updated)
+    @tickets     = current_user.tickets(:created_at.gt => (Time.now - 6.months)).group_by(&:week_updated)
     @statuses    = @tickets.values.flatten.map(&:status).uniq
     @resolutions = @tickets.values.flatten.map(&:resolution).reject(&:blank?).uniq
     render :"tickets/mine"
@@ -29,6 +29,7 @@ UnfuddleMetrics.controllers :tickets do
   end
 
   post :comment, :with => :ticket_id, :provides => :html do
+    halt redirect("/unfuddle_login") if !authenticated?
     @ticket = Ticket.first(:unfuddle_id => params[:ticket_id].strip)
     Comment.post(unfuddle_client, @ticket, params[:comment])
     render :"tickets/ticket", :layout => false

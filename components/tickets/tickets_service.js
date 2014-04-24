@@ -2,27 +2,29 @@ function TicketsService($http, $q, user) {
   this.$http = $http;
   this.$q = $q;
   this.user = user;
-  this.tickets = [];
 }
 
-TicketsService.prototype.getTickets = function(opt_url) {
+TicketsService.prototype.getTickets = function() {
+  var tickets = [],
+      deferred = this.$q.defer(),
+      reposUrl = this.createUrl_('users', this.user.username, 'repos');
+
+  this.fetchTickets_(reposUrl, tickets, deferred);
+
+  return deferred.promise;
+};
+
+TicketsService.prototype.fetchTickets_ = function(url, tickets, deferred) {
   var service  = this,
       $q       = this.$q,
       user     = this.user,
-      url      = opt_url || 'https://api.github.com/users/' + user.username + '/repos',
       request  = this.createRequest_(url),
-      promises = [],
-      tickets  = this.tickets,
-      deferred = this.deferred || (this.deferred = $q.defer());
+      promises = [];
 
   request.success(function(repos, status, headers) {
     repos.forEach(function(repo) {
-      var issuesUrl = [
-        'https://api.github.com/repos',
-        user.username,
-        repo.name,
-        'issues?state=all'
-      ].join('/');
+      var issuesUrl = service.createUrl_(
+        'repos', user.username, repo.name, 'issues?state=all');
 
       var issuesRequest = service.createRequest_(issuesUrl),
           issuesDeferred = $q.defer();
@@ -50,7 +52,7 @@ TicketsService.prototype.getTickets = function(opt_url) {
 
     var nextPageUrl = service.getNextPageUrl_(headers());
     if (nextPageUrl) {
-      service.getTickets(nextPageUrl);
+      service.fetchTickets_(nextPageUrl, tickets, deferred);
 
     } else {
       $q.all(promises).then(function() {
@@ -58,8 +60,11 @@ TicketsService.prototype.getTickets = function(opt_url) {
       });
     }
   });
+};
 
-  return deferred.promise;
+TicketsService.prototype.createUrl_ = function() {
+  var args = Array.prototype.slice.call(arguments);
+    return ['https://api.github.com'].concat(args).join('/');
 };
 
 TicketsService.prototype.createRequest_ = function(url) {

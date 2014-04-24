@@ -1,8 +1,13 @@
 <div id="content"
-    ng-controller="TicketsController"
+    ng-controller="TicketsController as ctrl"
     ng-if="user.loggedIn">
 
-    <input class="tickets-search" placeholder="Search to highlight certain tickets" />
+    <div id="loading" ng-if="loading">
+        <div class="message">Loading GitHub issues...</div>
+    </div>
+
+    <input class="tickets-search"
+        placeholder="Search to highlight certain tickets" />
 
     <a class="hide-non-matching-cards-link">Hide non-matching cards</a>
 

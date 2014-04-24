@@ -1,13 +1,13 @@
-<div class="ticket-card status-{{ticket.status}}">
+<div class="ticket-card status-{{ticket.status}}"
+    ng-click="ctrl.selectTicket(ticket)">
+
     <div class="id">{{ticket.id}}</div>
 
     <div class="number">
         {{ticket.number}}
         <div class="icons">
-            <div class="icon has-updates"
-                ng-if="ticket.hasUpdates"></div>
             <div class="icon has-comments"
-                ng-if="ticket.hasComments"></div>
+                ng-if="ticket.comments > 0"></div>
         </div>
     </div>
 

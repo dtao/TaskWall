@@ -36,7 +36,8 @@ TicketsService.prototype.fetchTickets_ = function(url, tickets, deferred) {
             number: repo.name + '#' + issue.number,
             status: issue.state,
             summary: issue.title,
-            hasComments: issue.comments > 0,
+            body: issue.body,
+            comments: issue.comments,
             created_at: issue.created_at,
             updated_at: issue.updated_at
           });

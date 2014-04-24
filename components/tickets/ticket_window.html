@@ -1,0 +1,43 @@
+<div class="ticket-window" ng-show="!!selectedTicket">
+    <div class="heading">
+        {{selectedTicket.number}}
+
+        <div class="created-at">
+            Created:
+            <span>{{selectedTicket.created_at | date:'yyyy-MM-dd'}}</span>
+        </div>
+
+        <div class="updated-at">
+            Updated:
+            <span>{{selectedTicket.updated_at | date:'yyyy-MM-dd'}}</span>
+        </div>
+
+        <div class="close">
+            <a ng-click="ctrl.deselectTicket()">Close</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="ticket-glance {{selectedTicket.status}}">
+            <div class="ticket-status">
+                Status:
+                <span class="value">{{selectedTicket.status}}</span>
+            </div>
+
+            <div class="ticket-resolution" ng-if="!!ticket.resolution">
+                Resolution:
+                <span class="value">{{selectedTicket.resolution}}</span>
+            </div>
+        </div>
+
+        <h2 class="summary">{{selectedTicket.summary}}</h2>
+
+        <div class="details">
+            <h3>Description</h3>
+
+            <div class="description"
+                ng-bind-html="selectedTicket.body | markdown">
+            </div>
+        </div>
+    </div>
+</div>

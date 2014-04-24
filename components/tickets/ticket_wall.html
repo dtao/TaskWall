@@ -19,8 +19,10 @@
     <div class="ticket-wall">
         <div class="tickets">
             <div ng-repeat="ticket in tickets | orderBy:'created_at':true"
-                ng-include="'components/tickets/ticket_card.html'">
+                ng-include="partial('tickets/ticket_card')">
             </div>
         </div>
     </div>
+
+    <ng-include src="partial('tickets/ticket_window')"></ng-include>
 </div>

@@ -211,8 +211,9 @@ a.hide-non-matching-cards-link:hover {
   background-position: -312px 0; }
 
 .ticket-wall {
-  border-collapse: collapse;
-  width: 100%; }
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box; }
   .ticket-wall th, .ticket-wall td {
     padding: 10px;
     text-align: left;
@@ -254,10 +255,10 @@ a.hide-non-matching-cards-link:hover {
   .ticket-card:hover .number {
     background-color: #ffffdd; }
 
-.status-new {
+.status-open {
   border: 2px solid #888888;
   background-color: white; }
-  .status-new .number {
+  .status-open .number {
     background-color: #dddddd; }
 
 .status-reopened {

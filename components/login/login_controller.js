@@ -1,4 +1,4 @@
-TaskWall.controller('LoginController', function($scope, user) {
+function LoginController($scope, user) {
   this.login = function() {
     if (!$scope.username) {
       alert('You forgot your username!');
@@ -12,4 +12,4 @@ TaskWall.controller('LoginController', function($scope, user) {
 
     user.login($scope.username, $scope.password);
   };
-});
+}

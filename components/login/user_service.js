@@ -1,4 +1,4 @@
-TaskWall.service('user', function($window, $q) {
+function UserService($window, $q) {
   var storage = $window.localStorage;
 
   this.username = storage.username;
@@ -40,4 +40,4 @@ TaskWall.service('user', function($window, $q) {
   this.getEncodedAuthorization = function() {
     return base64(this.username + ':' + this.password);
   };
-});
+}

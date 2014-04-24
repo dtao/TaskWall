@@ -1,4 +1,4 @@
-TaskWall.controller('TicketsController', function($scope, $http, $q, user) {
+function TicketsController($scope, $http, $q, user) {
   $scope.tickets = [];
 
   function getNextPageUrl(headers) {
@@ -73,4 +73,4 @@ TaskWall.controller('TicketsController', function($scope, $http, $q, user) {
   user.whenLoggedIn().then(function() {
     fetchRepos();
   });
-});
+}

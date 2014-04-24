@@ -1,3 +1,3 @@
-TaskWall.controller('ApplicationController', function($rootScope, user) {
+function ApplicationController($rootScope, user) {
   $rootScope.user = user;
-});
+}

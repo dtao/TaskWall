@@ -1,0 +1,26 @@
+<div id="content"
+    ng-controller="TicketsController"
+    ng-if="user.loggedIn">
+
+    <input class="tickets-search" placeholder="Search to highlight certain tickets" />
+
+    <a class="hide-non-matching-cards-link">Hide non-matching cards</a>
+
+    <div class="status-selectors">
+        <div class="label">Show:</div>
+        <div class="status-selector selected"
+            ng-repeat="status in statuses">
+
+            <div class="icon"></div>
+            <span class="value">{{status}}</span>
+        </div>
+    </div>
+
+    <div class="ticket-wall">
+        <div class="tickets">
+            <div ng-repeat="ticket in tickets | orderBy:'created_at':true"
+                ng-include="'components/tickets/ticket_card.html'">
+            </div>
+        </div>
+    </div>
+</div>

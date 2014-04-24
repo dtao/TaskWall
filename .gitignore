@@ -1,16 +1,1 @@
-# Padrino crap
-.DS_Store
-log/**/*
-tmp/**/*
-bin/*
-db/*.db
-vendor/gems/*
-!vendor/gems/cache/
-.sass-cache/*
-
-# My crap
-.rvmrc
-*.sublime-project
-*.sublime-workspace
-google.yml
-unfuddle.yml
+.sass-cache/

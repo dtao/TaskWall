@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="TaskWall">
+
+<head>
+    <title>TaskWall</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/generic.css" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/application.css" />
+    <script type="text/javascript" src="javascripts/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="javascripts/underscore.min.js"></script>
+    <script type="text/javascript" src="javascripts/angular-1.2.16.js"></script>
+    <script type="text/javascript" src="javascripts/highcharts-2.2.5.js"></script>
+    <script type="text/javascript" src="javascripts/taskwall.js"></script>
+    <script type="text/javascript" src="javascripts/application.js"></script>
+    <script type="text/javascript" src="javascripts/tickets.js"></script>
+</head>
+
+<body>
+    <div id="navmenu">
+        <ul>
+            <li>Logged in as Dan</li>
+            <li><a href="/logout">Log out</a></li>
+        </ul>
+    </div>
+
+    <div id="content" ng-controller="TicketsController">
+        <input class="tickets-search" placeholder="Search to highlight certain tickets" />
+
+        <a class="hide-non-matching-cards-link">Hide non-matching cards</a>
+
+        <div class="status-selectors">
+            <div class="label">Show:</div>
+            <div class="status-selector selected"
+                ng-repeat="status in statuses">
+
+                <div class="icon"></div>
+                <span class="value">{{status}}</span>
+            </div>
+        </div>
+
+        <div class="ticket-wall">
+            <div class="tickets">
+                <div ng-repeat="ticket in tickets"
+                    ng-include="'ticket_card.html'">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

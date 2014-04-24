@@ -1,0 +1,15 @@
+<div class="ticket-card status-{{ticket.status}}">
+    <div class="id">{{ticket.id}}</div>
+
+    <div class="number">
+        {{ticket.number}}
+        <div class="icons">
+            <div class="icon has-updates"
+                ng-if="ticket.hasUpdates"></div>
+            <div class="icon has-comments"
+                ng-if="ticket.hasComments"></div>
+        </div>
+    </div>
+
+    <div class="summary">{{ticket.summary}}</div>
+</div>

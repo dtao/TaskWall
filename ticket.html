@@ -1,0 +1,40 @@
+<div class="ticket">
+    <div class="heading">
+        <h1>Ticket {{ticket.number}}</h1>
+
+        <div class="created-at">
+            Created:
+            <span>{{ticket.created | date}}</span>
+        </div>
+
+        <div class="updated-at">
+            Updated:
+            <span>{{ticket.updated | date}}</span>
+        </div>
+
+        <div class="close">
+            <a>Close</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="ticket-glance {{ticket.status}}">
+            <div class="ticket-status">
+                Status:
+                <span class="value">{{ticket.status}}</span>
+            </div>
+
+            <div class="ticket-resolution" ng-if="!!ticket.resolution">
+                Resolution:
+                <span class="value">{{ticket.resolution}}</span>
+            </div>
+        </div>
+
+        <h2 class="summary">{{ticket.summary}}</h2>
+
+        <div class="section-selectors">
+            <div class="label">View:</div>
+            <!-- where I left off -->
+        </div>
+    </div>
+</div>

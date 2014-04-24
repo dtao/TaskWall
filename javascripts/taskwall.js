@@ -1,11 +1,71 @@
 var TaskWall = angular.module('TaskWall', []);
 
-TaskWall.controller('TicketsController', function($scope, $http, $q) {
-  $scope.tickets = [];
+TaskWall.service('user', function($window, $q) {
+  var storage = $window.localStorage;
+
+  this.username = storage.username;
+  this.password = storage.password;
+
+  var deferredLogin = $q.defer();
 
   function base64(string) {
     return btoa(unescape(encodeURIComponent(string)));
   }
+
+  this.login = function(username, password) {
+    this.username = storage.username = username;
+    this.password = storage.password = password;
+    deferredLogin.resolve();
+  };
+
+  this.logout = function() {
+    delete storage.username;
+    delete storage.password;
+    this.username = null;
+    this.password = null;
+  };
+
+  Object.defineProperty(this, 'loggedIn', {
+    get: function() {
+      return !!this.username && !!this.password;
+    }
+  });
+
+  if (this.loggedIn) {
+    deferredLogin.resolve();
+  }
+
+  this.whenLoggedIn = function() {
+    return deferredLogin.promise;
+  };
+
+  this.getEncodedAuthorization = function() {
+    return base64(this.username + ':' + this.password);
+  };
+});
+
+TaskWall.controller('ApplicationController', function($rootScope, user) {
+  $rootScope.user = user;
+});
+
+TaskWall.controller('LoginController', function($scope, user) {
+  this.login = function() {
+    if (!$scope.username) {
+      alert('You forgot your username!');
+      return;
+    }
+
+    if (!$scope.password) {
+      alert('You forgot your password!');
+      return;
+    }
+
+    user.login($scope.username, $scope.password);
+  };
+});
+
+TaskWall.controller('TicketsController', function($scope, $http, $q, user) {
+  $scope.tickets = [];
 
   function getNextPageUrl(headers) {
     var linkHeader = headers['link'];
@@ -31,7 +91,7 @@ TaskWall.controller('TicketsController', function($scope, $http, $q) {
       url: url,
       headers: {
         'Accept': 'application/vnd.github.v3+json',
-        'Authorization': 'Basic ' + base64('dtao:<password>')
+        'Authorization': 'Basic ' + user.getEncodedAuthorization()
       }
     });
   }
@@ -39,13 +99,13 @@ TaskWall.controller('TicketsController', function($scope, $http, $q) {
   var requests = [];
 
   function fetchRepos(url) {
-    url || (url = 'https://api.github.com/users/dtao/repos');
+    url || (url = 'https://api.github.com/users/' + user.username + '/repos');
 
     var request = createRequest(url);
 
     request.success(function(repos, status, headers) {
       repos.forEach(function(repo) {
-        var issuesRequest = createRequest('https://api.github.com/repos/dtao/' + repo.name + '/issues?state=all');
+        var issuesRequest = createRequest('https://api.github.com/repos/' + user.username + '/' + repo.name + '/issues?state=all');
 
         issuesRequest.success(function(issues) {
           issues.forEach(function(issue) {
@@ -76,5 +136,7 @@ TaskWall.controller('TicketsController', function($scope, $http, $q) {
     });
   }
 
-  fetchRepos();
+  user.whenLoggedIn().then(function() {
+    fetchRepos();
+  });
 });

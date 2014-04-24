@@ -107,7 +107,7 @@ table td {
 .field {
   margin-bottom: 5px; }
 
-#unfuddle-login {
+#login {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -115,24 +115,24 @@ table td {
   background-color: white;
   z-index: 1000; }
   @media all and (min-width: 1600px) {
-    #unfuddle-login {
+    #login {
       height: 900px;
       width: 1200px;
       margin-top: -450px;
       margin-left: -600px; } }
   @media all and (min-width: 1200px) and (max-width: 1599px) {
-    #unfuddle-login {
+    #login {
       height: 768px;
       width: 1024px;
       margin-top: -384px;
       margin-left: -512px; } }
   @media all and (max-width: 1199px) {
-    #unfuddle-login {
+    #login {
       height: 600px;
       width: 800px;
       margin-top: -300px;
       margin-left: -400px; } }
-  #unfuddle-login .heading {
+  #login .heading {
     position: absolute;
     top: 0;
     left: 0;
@@ -142,7 +142,7 @@ table td {
     color: white;
     font-size: 32px;
     padding: 10px; }
-  #unfuddle-login .content {
+  #login .content {
     position: absolute;
     top: 60px;
     left: 0;
@@ -150,7 +150,7 @@ table td {
     bottom: 0;
     padding: 10px;
     overflow: auto; }
-    #unfuddle-login .content form {
+    #login .content form {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -160,22 +160,22 @@ table td {
       margin-left: -25%;
       padding: 0 25px;
       text-align: left; }
-      #unfuddle-login .content form .text, #unfuddle-login .content form .button {
+      #login .content form .text, #login .content form .button {
         font-size: 24px; }
-      #unfuddle-login .content form label {
+      #login .content form label {
         display: block;
         font-weight: bold;
         margin-bottom: 5px; }
-      #unfuddle-login .content form input {
+      #login .content form input {
         display: block;
         margin-bottom: 10px;
         padding: 5px; }
-      #unfuddle-login .content form input.text {
+      #login .content form input.text {
         box-sizing: border-box;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         width: 100%; }
-      #unfuddle-login .content form .skip-action {
+      #login .content form .skip-action {
         text-align: right; }
 
 .tickets-search {
